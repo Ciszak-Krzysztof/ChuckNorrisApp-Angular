@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
 import { JokeService } from './joke.service';
-import { map } from 'rxjs/operators';
 import { Joke } from './joke.model';
 
 @Component({
@@ -9,10 +9,17 @@ import { Joke } from './joke.model';
   styleUrls: ['./joke.component.css'],
 })
 export class JokeComponent implements OnInit {
+  impersonateName: string = '';
+  isChuck: boolean = true;
+
   joke: Joke = {
-    id: 1,
-    joke: 'abc',
+    id: 0,
+    joke: '',
   };
+  selectedCategory: string = 'nerdy';
+  firstName: string = 'Chuck';
+  lastName: string = 'Norris';
+  categories: String[] = [];
 
   constructor(private jokeService: JokeService) {}
 
@@ -21,12 +28,30 @@ export class JokeComponent implements OnInit {
       console.log(joke);
       this.joke = joke;
     });
+
+    this.jokeService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+      console.log(categories);
+    });
   }
 
   fetchJoke() {
-    this.jokeService.getRandomJoke().subscribe((joke) => {
-      console.log(joke);
-      this.joke = joke;
-    });
+    if (this.impersonateName.length !== 0) {
+      this.isChuck = false;
+      this.firstName = this.impersonateName.split(' ')[0];
+      if (this.impersonateName.split(' ')[1]) {
+        this.lastName = this.impersonateName.split(' ')[1];
+      } else {
+        this.lastName = '';
+      }
+    } else {
+      this.isChuck = true;
+      this.firstName = 'Chuck';
+      this.lastName = 'Norris';
+    }
+
+    this.jokeService
+      .getJoke(this.selectedCategory, this.firstName, this.lastName)
+      .subscribe((joke) => (this.joke = joke));
   }
 }

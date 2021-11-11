@@ -1,18 +1,27 @@
 <div>
-  <img src="../../assets/Chuck Norris photo@3x.png" alt="" />
+  <img *ngIf="!isChuck" src="../../assets/Random photo@3x.png" alt="" />
+  <img *ngIf="isChuck" src="../../assets/Chuck Norris photo@3x.png" alt="" />
   <p>{{ joke.joke }}</p>
   <form class="form">
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Select category</mat-label>
-      <mat-select>
+      <mat-select
+        [ngModel]="selectedCategory"
+        [ngModelOptions]="{ standalone: true }"
+      >
         <mat-option value="option1" disabled>Select category</mat-option>
-        <mat-option value="option2">Explicit</mat-option>
-        <mat-option value="option3">Nerdy</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">{{
+          category
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Impersonate Chuck Norris</mat-label>
-      <input matInput />
+      <input
+        matInput
+        [(ngModel)]="impersonateName"
+        [ngModelOptions]="{ standalone: true }"
+      />
     </mat-form-field>
     <div>
       <button
@@ -22,7 +31,9 @@
         color="primary"
         (click)="fetchJoke()"
       >
-        Primary
+        Draw a random
+        {{ impersonateName }}
+        Joke
       </button>
     </div>
   </form>

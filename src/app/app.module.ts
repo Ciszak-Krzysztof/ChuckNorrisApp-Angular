@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 import { JokeComponent } from './joke/joke.component';
 import { JokeService } from './joke/joke.service';
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatButtonModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [JokeService],
   bootstrap: [AppComponent],
