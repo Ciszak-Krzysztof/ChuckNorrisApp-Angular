@@ -1,5 +1,5 @@
 #Chuck Norris App
-Angular App that allows drawing random Chuck Norris jokes. It also allows selection of category of joke and impersonation of Chuck Norris in mentioned jokes.
+Angular App + Angular Material that allows drawing random Chuck Norris jokes. It also allows selection of category of joke and impersonation of Chuck Norris in mentioned jokes.
 
 Link for the app
 https://Ciszak-Krzysztof.github.io/ChuckNorrisApp-Angular
