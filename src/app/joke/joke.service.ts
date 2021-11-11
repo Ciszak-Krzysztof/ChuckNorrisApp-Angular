@@ -7,7 +7,7 @@ import { jokeResult } from './jokeResult.model';
 
 @Injectable()
 export class JokeService {
-  baseUrl: string = 'http://api.icndb.com/';
+  baseUrl: string = 'https://api.icndb.com/';
 
   constructor(private httpClient: HttpClient) {}
 
