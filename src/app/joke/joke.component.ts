@@ -16,7 +16,7 @@ export class JokeComponent implements OnInit {
     id: 0,
     joke: '',
   };
-  selectedCategory: string = 'nerdy';
+  selectedCategory: string = '';
   firstName: string = 'Chuck';
   lastName: string = 'Norris';
   categories: String[] = [];
@@ -25,13 +25,11 @@ export class JokeComponent implements OnInit {
 
   ngOnInit(): void {
     this.jokeService.getRandomJoke().subscribe((joke) => {
-      console.log(joke);
       this.joke = joke;
     });
 
     this.jokeService.getCategories().subscribe((categories) => {
       this.categories = categories;
-      console.log(categories);
     });
   }
 
@@ -53,5 +51,9 @@ export class JokeComponent implements OnInit {
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
       .subscribe((joke) => (this.joke = joke));
+  }
+
+  public onValueChanged(selected: any): void {
+    this.selectedCategory = selected;
   }
 }
