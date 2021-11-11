@@ -1,0 +1,29 @@
+<div>
+  <img src="../../assets/Chuck Norris photo@3x.png" alt="" />
+  <p>{{ joke.joke }}</p>
+  <form class="form">
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Select category</mat-label>
+      <mat-select>
+        <mat-option value="option1" disabled>Select category</mat-option>
+        <mat-option value="option2">Explicit</mat-option>
+        <mat-option value="option3">Nerdy</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Impersonate Chuck Norris</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <div>
+      <button
+        type="button"
+        class="full-width"
+        mat-flat-button
+        color="primary"
+        (click)="fetchJoke()"
+      >
+        Primary
+      </button>
+    </div>
+  </form>
+</div>

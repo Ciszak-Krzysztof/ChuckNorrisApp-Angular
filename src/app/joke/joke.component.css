@@ -1,0 +1,21 @@
+img {
+  width: 100%;
+}
+
+p {
+  margin-top: 2vh;
+}
+
+.form {
+  width: 100%;
+  margin-top: 3vh;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  height: 5vh;
+  margin-top: 1vh;
+}
