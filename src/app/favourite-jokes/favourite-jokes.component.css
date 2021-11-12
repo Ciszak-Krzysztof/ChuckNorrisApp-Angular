@@ -1,0 +1,9 @@
+.joke-container {
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: 0;
+}

@@ -1,7 +1,14 @@
 <div>
   <img *ngIf="!isChuck" src="assets/Random photo@3x.png" alt="" />
   <img *ngIf="isChuck" src="assets/Chuck Norris photo@3x.png" alt="" />
-  <p>{{ joke.joke }}</p>
+  <div class="joke-container">
+    <span>{{ joke.joke }}</span
+    ><span class="button">
+      <button mat-icon-button color="warn">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </span>
+  </div>
   <form class="form">
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Select category</mat-label>
@@ -27,7 +34,7 @@
     <div>
       <button
         type="button"
-        class="full-width"
+        class="full-width fetchButton"
         mat-flat-button
         (click)="fetchJoke()"
       >

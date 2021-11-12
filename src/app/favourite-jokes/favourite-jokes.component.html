@@ -1,1 +1,11 @@
-<p>favourite-jokes works!</p>
+<h2>Favourite Jokes</h2>
+<div>
+  <mat-card class="joke-container" *ngFor="let favouriteJoke of favouriteJokes">
+    <span>{{ favouriteJoke }}</span>
+    <span class="button">
+      <button mat-mini-fab color="basic">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </span>
+  </mat-card>
+</div>
