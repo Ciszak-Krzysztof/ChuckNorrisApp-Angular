@@ -1,0 +1,12 @@
+span {
+  margin-left: 2%;
+}
+
+a {
+  color: white;
+  font-size: 2vh;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
