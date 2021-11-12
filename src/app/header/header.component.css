@@ -10,3 +10,7 @@ a {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.active {
+  color: rgb(134, 134, 134);
+}

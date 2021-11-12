@@ -15,9 +15,10 @@ import { JokeComponent } from './joke/joke.component';
 import { JokeService } from './joke/joke.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.component';
 
 @NgModule({
-  declarations: [AppComponent, JokeComponent, HeaderComponent],
+  declarations: [AppComponent, JokeComponent, HeaderComponent, FavouriteJokesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
