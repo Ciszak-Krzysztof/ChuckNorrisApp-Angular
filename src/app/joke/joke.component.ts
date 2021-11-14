@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { JokeService } from './joke.service';
 import { Joke } from './joke.model';
+import { FavouriteJokesService } from '../favourite-jokes/favourite-jokes.service';
 
 @Component({
   selector: 'app-joke',
@@ -21,7 +22,10 @@ export class JokeComponent implements OnInit {
   lastName: string = 'Norris';
   categories: String[] = [];
 
-  constructor(private jokeService: JokeService) {}
+  constructor(
+    private jokeService: JokeService,
+    private favouriteService: FavouriteJokesService
+  ) {}
 
   ngOnInit(): void {
     this.jokeService.getRandomJoke().subscribe((joke) => {
@@ -31,6 +35,10 @@ export class JokeComponent implements OnInit {
     this.jokeService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
+  }
+
+  onAddFavourite() {
+    this.favouriteService.addFavouriteJoke(this.joke);
   }
 
   fetchJoke() {

@@ -18,6 +18,7 @@ import { JokeService } from './joke/joke.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.component';
+import { FavouriteJokesService } from './favourite-jokes/favourite-jokes.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.compo
     HttpClientModule,
     FormsModule,
   ],
-  providers: [JokeService],
+  providers: [JokeService, FavouriteJokesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

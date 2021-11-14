@@ -1,4 +1,3 @@
-export interface Joke {
-  id: number;
-  joke: string;
+export class Joke {
+  constructor(public id: number, public joke: string) {}
 }

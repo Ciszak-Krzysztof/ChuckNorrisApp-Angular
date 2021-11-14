@@ -4,7 +4,7 @@
   <div class="joke-container">
     <span>{{ joke.joke }}</span
     ><span class="button">
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="onAddFavourite()">
         <mat-icon>favorite</mat-icon>
       </button>
     </span>
