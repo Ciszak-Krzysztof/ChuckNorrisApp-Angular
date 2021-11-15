@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Joke } from './joke.model';
-import { jokeResult } from './jokeResult.model';
+import { Joke } from '../models/joke.model';
 import { baseURL } from 'src/constants/api';
+import { JokeResult } from '../models/JokeResult.model';
 
 @Injectable()
 export class JokeService {
@@ -12,7 +12,7 @@ export class JokeService {
 
   getRandomJoke(): Observable<Joke> {
     return this.httpClient
-      .get<jokeResult>(baseURL + 'jokes/random?escape=javascript')
+      .get<JokeResult>(baseURL + 'jokes/random?escape=javascript')
       .pipe(map((result) => result.value));
   }
 
@@ -22,16 +22,20 @@ export class JokeService {
       .pipe(map((result) => result.value));
   }
 
-  getJoke(category: string, firstName: string, lastName: string) {
+  getJoke(
+    category: string,
+    firstName: string,
+    lastName: string
+  ): Observable<Joke> {
     if (category === '') {
       return this.httpClient
-        .get<jokeResult>(
+        .get<JokeResult>(
           `${baseURL}jokes/random?firstName=${firstName}&lastName=${lastName}&escape=javascript`
         )
         .pipe(map((result) => result.value));
     } else {
       return this.httpClient
-        .get<jokeResult>(
+        .get<JokeResult>(
           `${baseURL}jokes/random?firstName=${firstName}&lastName=${lastName}&limitTo=${category}&escape=javascript`
         )
         .pipe(map((result) => result.value));

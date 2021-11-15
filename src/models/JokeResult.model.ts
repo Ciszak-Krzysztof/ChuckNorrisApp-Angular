@@ -1,6 +1,6 @@
 import { Joke } from './joke.model';
 
-export interface jokeResult {
+export interface JokeResult {
   type: string;
   value: Joke;
 }
