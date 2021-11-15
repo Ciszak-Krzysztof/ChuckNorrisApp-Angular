@@ -17,7 +17,7 @@ export class JokeComponent implements OnInit {
     joke: '',
   };
   public selectedCategory: string = '';
-  public categories: String[] = [];
+  // public categories: String[] = [];
   private firstName: string = 'Chuck';
   private lastName: string = 'Norris';
 
@@ -31,16 +31,16 @@ export class JokeComponent implements OnInit {
       this.joke = joke;
     });
 
-    this.jokeService.getCategories().subscribe((categories: String[]) => {
-      this.categories = categories;
-    });
+    // this.jokeService.getCategories().subscribe((categories: String[]) => {
+    //   this.categories = categories;
+    // });
   }
 
-  onAddFavourite(): void {
+  public onAddFavourite(): void {
     this.favouriteService.addFavouriteJoke(this.joke);
   }
 
-  fetchJoke(): void {
+  public fetchJoke(): void {
     if (this.impersonateName.length !== 0) {
       this.isChuck = false;
       this.firstName = this.impersonateName.split(' ')[0];
@@ -55,7 +55,11 @@ export class JokeComponent implements OnInit {
       .subscribe((joke: Joke) => (this.joke = joke));
   }
 
-  public onValueChanged(selected: any): void {
-    this.selectedCategory = selected;
+  public selectCategory(category: string) {
+    this.selectedCategory = category;
   }
+
+  // public onValueChanged(selected: any): void {
+  //   this.selectedCategory = selected;
+  // }
 }

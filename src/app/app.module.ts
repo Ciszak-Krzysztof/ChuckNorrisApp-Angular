@@ -19,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.component';
 import { FavouriteJokesService } from '../services/favourite-jokes.service';
+import { JokeImageComponent } from './joke/joke-image/joke-image.component';
+import { JokeCategoryComponent } from './joke/joke-category/joke-category.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { FavouriteJokesService } from '../services/favourite-jokes.service';
     JokeComponent,
     HeaderComponent,
     FavouriteJokesComponent,
+    JokeImageComponent,
+    JokeCategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+<mat-form-field class="full-width" appearance="fill">
+  <mat-label>Select category</mat-label>
+  <mat-select
+    [ngModel]="selectedCategory"
+    [ngModelOptions]="{ standalone: true }"
+    (ngModelChange)="onValueChanged($event)"
+  >
+    <mat-option value="option1" disabled>Select category</mat-option>
+    <mat-option *ngFor="let category of categories" [value]="category">{{
+      category
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
