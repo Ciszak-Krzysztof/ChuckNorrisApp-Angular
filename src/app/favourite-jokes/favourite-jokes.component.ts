@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Joke } from '../joke/joke.model';
-import { FavouriteJokesService } from './favourite-jokes.service';
+import { Joke } from '../../models/joke.model';
+import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 
 @Component({
   selector: 'app-favourite-jokes',
@@ -9,7 +9,7 @@ import { FavouriteJokesService } from './favourite-jokes.service';
   styleUrls: ['./favourite-jokes.component.css'],
 })
 export class FavouriteJokesComponent implements OnInit, OnDestroy {
-  favouriteJokes: Joke[] = [];
+  public favouriteJokes: Joke[] = [];
   private subscription!: Subscription;
 
   constructor(private favouriteService: FavouriteJokesService) {}
@@ -23,7 +23,7 @@ export class FavouriteJokesComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDeleteJoke(index: number) {
+  onDeleteJoke(index: number): void {
     this.favouriteService.deleteFavouriteJoke(index);
   }
 
