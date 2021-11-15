@@ -14,11 +14,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 
 import { JokeComponent } from './joke/joke.component';
-import { JokeService } from './joke/joke.service';
+import { JokeService } from '../services/joke.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.component';
-import { FavouriteJokesService } from './favourite-jokes/favourite-jokes.service';
+import { FavouriteJokesService } from '../services/favourite-jokes.service';
 
 @NgModule({
   declarations: [

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { JokeService } from './joke.service';
-import { Joke } from './joke.model';
-import { FavouriteJokesService } from '../favourite-jokes/favourite-jokes.service';
+import { JokeService } from '../../services/joke.service';
+import { Joke } from '../../models/joke.model';
+import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 
 @Component({
   selector: 'app-joke',
@@ -10,17 +10,16 @@ import { FavouriteJokesService } from '../favourite-jokes/favourite-jokes.servic
   styleUrls: ['./joke.component.css'],
 })
 export class JokeComponent implements OnInit {
-  impersonateName: string = '';
-  isChuck: boolean = true;
-
-  joke: Joke = {
+  public impersonateName: string = '';
+  public isChuck: boolean = true;
+  public joke: Joke = {
     id: 0,
     joke: '',
   };
-  selectedCategory: string = '';
-  firstName: string = 'Chuck';
-  lastName: string = 'Norris';
-  categories: String[] = [];
+  public selectedCategory: string = '';
+  public categories: String[] = [];
+  private firstName: string = 'Chuck';
+  private lastName: string = 'Norris';
 
   constructor(
     private jokeService: JokeService,
@@ -28,37 +27,32 @@ export class JokeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.jokeService.getRandomJoke().subscribe((joke) => {
+    this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
       this.joke = joke;
     });
 
-    this.jokeService.getCategories().subscribe((categories) => {
+    this.jokeService.getCategories().subscribe((categories: String[]) => {
       this.categories = categories;
     });
   }
 
-  onAddFavourite() {
+  onAddFavourite(): void {
     this.favouriteService.addFavouriteJoke(this.joke);
   }
 
-  fetchJoke() {
+  fetchJoke(): void {
     if (this.impersonateName.length !== 0) {
       this.isChuck = false;
       this.firstName = this.impersonateName.split(' ')[0];
-      if (this.impersonateName.split(' ')[1]) {
-        this.lastName = this.impersonateName.split(' ')[1];
-      } else {
-        this.lastName = '';
-      }
+      this.lastName = this.impersonateName.split(' ')[1] ?? '';
     } else {
       this.isChuck = true;
       this.firstName = 'Chuck';
       this.lastName = 'Norris';
     }
-
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
-      .subscribe((joke) => (this.joke = joke));
+      .subscribe((joke: Joke) => (this.joke = joke));
   }
 
   public onValueChanged(selected: any): void {
