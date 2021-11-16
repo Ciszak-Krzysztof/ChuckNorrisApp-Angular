@@ -12,6 +12,7 @@ import { FavouriteJokesService } from '../services/favourite-jokes.service';
 export class JokeComponent implements OnInit {
   public impersonateName: string = '';
   public isChuck: boolean = true;
+  public isFavourite: boolean = false;
   public joke: Joke = {
     id: 0,
     joke: '',
@@ -29,10 +30,14 @@ export class JokeComponent implements OnInit {
     this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
       this.joke = joke;
     });
+    if (this.favouriteService.favouriteCheck(this.joke)) {
+      this.isFavourite = true;
+    }
   }
 
-  public onAddFavourite(): void {
-    this.favouriteService.addFavouriteJoke(this.joke);
+  public onToggleFavourite(): void {
+    this.favouriteService.toggleFavouriteJoke(this.joke);
+    this.isFavourite = !this.isFavourite;
   }
 
   public selectCategory(category: string) {

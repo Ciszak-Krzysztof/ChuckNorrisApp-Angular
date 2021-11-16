@@ -24,7 +24,6 @@ p {
   display: flex;
 }
 
-.favButton {
-  margin-left: auto;
-  margin-right: 0;
+.notFav {
+  color: gray;
 }

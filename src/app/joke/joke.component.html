@@ -3,7 +3,12 @@
   <div class="joke-container">
     <span>{{ joke.joke }}</span
     ><span class="button">
-      <button mat-icon-button color="warn" (click)="onAddFavourite()">
+      <button
+        mat-icon-button
+        color="warn"
+        [ngClass]="{ notFav: isFavourite === false }"
+        (click)="onToggleFavourite()"
+      >
         <mat-icon>favorite</mat-icon>
       </button>
     </span>
