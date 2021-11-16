@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { JokeService } from '../../services/joke.service';
-import { Joke } from '../../models/joke.model';
-import { FavouriteJokesService } from '../../services/favourite-jokes.service';
+import { JokeService } from '../services/joke.service';
+import { Joke } from '../models/joke.model';
+import { FavouriteJokesService } from '../services/favourite-jokes.service';
 
 @Component({
   selector: 'app-joke',
@@ -17,7 +17,6 @@ export class JokeComponent implements OnInit {
     joke: '',
   };
   public selectedCategory: string = '';
-  public categories: String[] = [];
   private firstName: string = 'Chuck';
   private lastName: string = 'Norris';
 
@@ -30,17 +29,17 @@ export class JokeComponent implements OnInit {
     this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
       this.joke = joke;
     });
-
-    this.jokeService.getCategories().subscribe((categories: String[]) => {
-      this.categories = categories;
-    });
   }
 
-  onAddFavourite(): void {
+  public onAddFavourite(): void {
     this.favouriteService.addFavouriteJoke(this.joke);
   }
 
-  fetchJoke(): void {
+  public selectCategory(category: string) {
+    this.selectedCategory = category;
+  }
+
+  public fetchJoke(): void {
     if (this.impersonateName.length !== 0) {
       this.isChuck = false;
       this.firstName = this.impersonateName.split(' ')[0];
@@ -53,9 +52,5 @@ export class JokeComponent implements OnInit {
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
       .subscribe((joke: Joke) => (this.joke = joke));
-  }
-
-  public onValueChanged(selected: any): void {
-    this.selectedCategory = selected;
   }
 }
