@@ -1,6 +1,5 @@
 <div>
-  <img *ngIf="!isChuck" src="assets/images/Random photo@3x.png" alt="" />
-  <img *ngIf="isChuck" src="assets/images/Chuck Norris photo@3x.png" alt="" />
+  <app-joke-image [isChuck]="isChuck"></app-joke-image>
   <div class="joke-container">
     <span>{{ joke.joke }}</span
     ><span class="button">
@@ -10,19 +9,9 @@
     </span>
   </div>
   <form class="form">
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Select category</mat-label>
-      <mat-select
-        [ngModel]="selectedCategory"
-        [ngModelOptions]="{ standalone: true }"
-        (ngModelChange)="onValueChanged($event)"
-      >
-        <mat-option value="option1" disabled>Select category</mat-option>
-        <mat-option *ngFor="let category of categories" [value]="category">{{
-          category
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <app-joke-category
+      (selectedCategory)="selectCategory($event)"
+    ></app-joke-category>
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Impersonate Chuck Norris</mat-label>
       <input
