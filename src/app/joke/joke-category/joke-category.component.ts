@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { JokeService } from 'src/services/joke.service';
+import { JokeService } from 'src/app/services/joke.service';
 
 @Component({
   selector: 'app-joke-category',
