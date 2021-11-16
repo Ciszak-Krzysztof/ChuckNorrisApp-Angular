@@ -13,6 +13,21 @@ export class FavouriteJokesService {
     return this.favouriteJokes;
   }
 
+  favouriteCheck(joke: Joke) {
+    return this.favouriteJokes.find((newjoke) => newjoke.id === joke.id);
+  }
+
+  toggleFavouriteJoke(joke: Joke): void {
+    if (!this.favouriteCheck(joke)) {
+      this.addFavouriteJoke(joke);
+    } else {
+      let index: number = this.favouriteJokes.findIndex(
+        (newJoke) => newJoke.id === joke.id
+      );
+      this.deleteFavouriteJoke(index);
+    }
+  }
+
   addFavouriteJoke(joke: Joke): void {
     this.favouriteJokes.push(joke);
     this.jokesChanged.next(this.favouriteJokes);
