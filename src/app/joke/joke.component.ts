@@ -31,7 +31,7 @@ export class JokeComponent implements OnInit {
       this.joke = joke;
     });
     if (this.favouriteService.favouriteCheck(this.joke)) {
-      this.isFavourite = true;
+      this.isFavourite = true ?? false;
     }
   }
 
@@ -57,5 +57,8 @@ export class JokeComponent implements OnInit {
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
       .subscribe((joke: Joke) => (this.joke = joke));
+    if (!this.favouriteService.favouriteCheck(this.joke)) {
+      this.isFavourite = false ?? true;
+    }
   }
 }
