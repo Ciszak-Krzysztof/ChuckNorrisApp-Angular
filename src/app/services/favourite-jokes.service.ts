@@ -4,12 +4,12 @@ import { Joke } from '../models/joke.model';
 
 export class FavouriteJokesService {
   public jokesChanged = new Subject<Joke[]>();
-  private favouriteJokes: Joke[] = [
-    new Joke(999, 'joke'),
-    new Joke(998, 'joke1'),
-  ];
+  private favouriteJokes: Joke[] = [];
 
   getFavouriteJokes(): Joke[] {
+    this.favouriteJokes = JSON.parse(
+      localStorage.getItem('favouriteJokes') || '[]'
+    );
     return this.favouriteJokes;
   }
 
@@ -29,11 +29,19 @@ export class FavouriteJokesService {
   }
 
   addFavouriteJoke(joke: Joke): void {
+    let favJokes = JSON.parse(localStorage.getItem('favouriteJokes') || '[]');
+    let data = [...favJokes, joke];
+    localStorage.setItem('favouriteJokes', JSON.stringify(data));
     this.favouriteJokes.push(joke);
     this.jokesChanged.next(this.favouriteJokes);
   }
 
   deleteFavouriteJoke(index: number): void {
+    let favJokes: Joke[] = JSON.parse(
+      localStorage.getItem('favouriteJokes') || '[]'
+    );
+    favJokes.splice(index, 1);
+    localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
     this.favouriteJokes.splice(index, 1);
     this.jokesChanged.next(this.favouriteJokes);
   }
