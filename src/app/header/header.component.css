@@ -14,3 +14,8 @@ a {
 .active {
   color: rgb(134, 134, 134);
 }
+
+.languagePicker {
+  margin-left: 6%;
+  max-width: 4%;
+}
