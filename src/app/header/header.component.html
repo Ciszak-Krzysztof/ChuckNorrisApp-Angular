@@ -1,17 +1,27 @@
 <mat-toolbar color="primary">
-  <span class="appTitle">Chuck Norris Joke App</span>
+  <!-- <span class="appTitle">Chuck Norris Joke App</span> -->
+  <span class="appTitle">{{ "header.appName" | translate }}</span>
   <span class="example-spacer"></span>
   <span>
     <a
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       routerLink="/"
-      >Get Jokes</a
+      >{{ "header.getJokesNav" | translate }}</a
     ></span
   >
   <span
-    ><a routerLinkActive="active" routerLink="/favourite"
-      >Favourite Jokes</a
-    ></span
+    ><a routerLinkActive="active" routerLink="/favourite">{{
+      "header.favJokesNav" | translate
+    }}</a></span
   >
+  <mat-select
+    [ngModel]="selectedLanguage"
+    [ngModelOptions]="{ standalone: true }"
+    (ngModelChange)="selectLanguage($event)"
+    class="languagePicker"
+  >
+    <mat-option value="en">EN</mat-option>
+    <mat-option value="pl">PL</mat-option>
+  </mat-select>
 </mat-toolbar>

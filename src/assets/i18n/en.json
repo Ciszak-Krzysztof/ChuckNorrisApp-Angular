@@ -1,0 +1,15 @@
+{
+  "header": {
+    "appName": "Chuck Norris App",
+    "getJokesNav": "Get Jokes",
+    "favJokesNav": "Favourite Jokes",
+    "settingsNav": "Settings"
+  },
+  "jokeCategory": "Select category",
+  "joke": {
+    "impersonate": "Impersonate Chuck Norris",
+    "drawJoke": "Draw a random",
+    "joke": "Joke"
+  },
+  "favouriteJokes": "Favourite Jokes"
+}
