@@ -1,0 +1,15 @@
+{
+  "header": {
+    "appName": "Aplikacja Chuck Norris",
+    "getJokesNav": "Pobierz dowcip",
+    "favJokesNav": "Ulubione dowcipy",
+    "settingsNav": "Ustawienia"
+  },
+  "jokeCategory": "Wybierz kategorię",
+  "joke": {
+    "impersonate": "Podszyj się pod Chucka Norrisa",
+    "drawJoke": "Pobierz losowy dowcip o",
+    "joke": ""
+  },
+  "favouriteJokes": "Ulubione dowcipy"
+}
