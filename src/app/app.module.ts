@@ -25,7 +25,7 @@ import { JokeImageComponent } from './joke/joke-image/joke-image.component';
 import { JokeCategoryComponent } from './joke/joke-category/joke-category.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
