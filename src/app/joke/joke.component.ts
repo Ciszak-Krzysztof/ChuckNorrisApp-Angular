@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { JokeService } from '../services/joke.service';
-import { Joke } from '../models/joke.model';
+import { Joke } from '../models/Joke.model';
 import { FavouriteJokesService } from '../services/favourite-jokes.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class JokeComponent implements OnInit {
     joke: '',
   };
   public selectedCategory: string = '';
-  private firstName: string = 'Chuck';
-  private lastName: string = 'Norris';
+  public firstName: string = 'Chuck';
+  public lastName: string = 'Norris';
 
   constructor(
     private jokeService: JokeService,
@@ -57,8 +57,10 @@ export class JokeComponent implements OnInit {
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
       .subscribe((joke: Joke) => (this.joke = joke));
-    if (!this.favouriteService.favouriteCheck(this.joke)) {
-      this.isFavourite = false ?? true;
-    }
+    setTimeout(() => {
+      if (!this.favouriteService.favouriteCheck(this.joke)) {
+        this.isFavourite = false ?? true;
+      }
+    }, 500);
   }
 }
