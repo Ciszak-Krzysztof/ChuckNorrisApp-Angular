@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 
-import { Joke } from '../models/joke.model';
+import { Joke } from '../models/Joke.model';
 
 export class FavouriteJokesService {
   public jokesChanged = new Subject<Joke[]>();

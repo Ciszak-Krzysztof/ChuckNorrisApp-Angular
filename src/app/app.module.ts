@@ -23,6 +23,7 @@ import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.compo
 import { FavouriteJokesService } from './services/favourite-jokes.service';
 import { JokeImageComponent } from './joke/joke-image/joke-image.component';
 import { JokeCategoryComponent } from './joke/joke-category/joke-category.component';
+import { JokeSaveComponent } from './joke/joke-save/joke-save.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FavouriteJokesComponent,
     JokeImageComponent,
     JokeCategoryComponent,
+    JokeSaveComponent,
   ],
   imports: [
     BrowserModule,

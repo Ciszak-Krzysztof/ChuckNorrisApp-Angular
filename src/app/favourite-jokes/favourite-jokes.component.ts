@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Joke } from '../models/joke.model';
+import { Joke } from '../models/Joke.model';
+
 import { FavouriteJokesService } from '../services/favourite-jokes.service';
 
 @Component({
