@@ -1,0 +1,25 @@
+<mat-grid-list class="saveJokesContainer" cols="6" rowHeight="5vh">
+  <mat-grid-tile
+    ><button mat-mini-fab class="amountButton" (click)="onReduceJokesAmount()">
+      <mat-icon>remove</mat-icon>
+    </button></mat-grid-tile
+  >
+  <mat-grid-tile
+    ><input type="number" min="1" max="100" [(ngModel)]="jokesAmount"
+  /></mat-grid-tile>
+  <mat-grid-tile
+    ><button mat-mini-fab class="amountButton" (click)="onAddJokesAmount()">
+      <mat-icon>add</mat-icon>
+    </button></mat-grid-tile
+  >
+  <mat-grid-tile colspan="3"
+    ><button
+      type="button"
+      class="full-width saveButton"
+      mat-flat-button
+      (click)="saveJokes()"
+    >
+      Save Jokes
+    </button></mat-grid-tile
+  >
+</mat-grid-list>
