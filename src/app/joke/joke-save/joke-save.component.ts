@@ -19,6 +19,7 @@ export class JokeSaveComponent implements OnInit {
   ngOnInit(): void {}
 
   saveJokes() {
+    this.joke.isLoading = true;
     if (this.joke.impersonateName.length !== 0) {
       this.joke.isChuck = false;
       this.joke.firstName = this.joke.impersonateName.split(' ')[0];
@@ -41,6 +42,7 @@ export class JokeSaveComponent implements OnInit {
     setTimeout(() => {
       this.convertJokesToString();
       this.saveStringToFile(this.convertedJokes);
+      this.joke.isLoading = false;
     }, 200);
   }
 
