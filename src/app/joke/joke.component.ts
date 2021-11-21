@@ -10,6 +10,7 @@ import { FavouriteJokesService } from '../services/favourite-jokes.service';
   styleUrls: ['./joke.component.css'],
 })
 export class JokeComponent implements OnInit {
+  public isLoading: boolean = false;
   public impersonateName: string = '';
   public isChuck: boolean = true;
   public isFavourite: boolean = false;
@@ -27,12 +28,16 @@ export class JokeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
       this.joke = joke;
     });
-    if (this.favouriteService.favouriteCheck(this.joke)) {
-      this.isFavourite = true ?? false;
-    }
+    setTimeout(() => {
+      if (!this.favouriteService.favouriteCheck(this.joke)) {
+        this.isFavourite = false ?? true;
+        this.isLoading = false;
+      }
+    }, 250);
   }
 
   public onToggleFavourite(): void {
@@ -45,6 +50,7 @@ export class JokeComponent implements OnInit {
   }
 
   public fetchJoke(): void {
+    this.isLoading = true;
     if (this.impersonateName.length !== 0) {
       this.isChuck = false;
       this.firstName = this.impersonateName.split(' ')[0];
@@ -60,7 +66,8 @@ export class JokeComponent implements OnInit {
     setTimeout(() => {
       if (!this.favouriteService.favouriteCheck(this.joke)) {
         this.isFavourite = false ?? true;
+        this.isLoading = false;
       }
-    }, 500);
+    }, 250);
   }
 }

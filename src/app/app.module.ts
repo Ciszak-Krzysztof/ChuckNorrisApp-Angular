@@ -14,6 +14,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { JokeComponent } from './joke/joke.component';
 import { JokeService } from './services/joke.service';
@@ -52,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatGridListModule,
     HttpClientModule,
     FormsModule,
+    MatProgressSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

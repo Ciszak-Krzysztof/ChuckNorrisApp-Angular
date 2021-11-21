@@ -10,18 +10,23 @@ import { FavouriteJokesService } from '../services/favourite-jokes.service';
   styleUrls: ['./favourite-jokes.component.css'],
 })
 export class FavouriteJokesComponent implements OnInit, OnDestroy {
+  public isLoading: boolean = false;
   public favouriteJokes: Joke[] = [];
   private subscription!: Subscription;
 
   constructor(private favouriteService: FavouriteJokesService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.favouriteJokes = this.favouriteService.getFavouriteJokes();
     this.subscription = this.favouriteService.jokesChanged.subscribe(
       (jokes: Joke[]) => {
         this.favouriteJokes = jokes;
       }
     );
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 250);
   }
 
   onDeleteJoke(index: number): void {

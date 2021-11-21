@@ -1,4 +1,7 @@
-<div>
+<div *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading">
   <app-joke-image [isChuck]="isChuck"></app-joke-image>
   <div class="joke-container">
     <span>{{ joke.joke }}</span
