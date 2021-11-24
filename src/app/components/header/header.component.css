@@ -5,6 +5,7 @@ span {
 a {
   color: white;
   font-size: 2vh;
+  text-decoration: none;
 }
 
 .example-spacer {
@@ -12,10 +13,11 @@ a {
 }
 
 .active {
-  color: rgb(134, 134, 134);
+  text-decoration: underline;
 }
 
 .languagePicker {
   margin-left: 6%;
   max-width: 4%;
+  font-size: 2vh;
 }

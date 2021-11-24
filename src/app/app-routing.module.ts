@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.component';
-import { JokeComponent } from './joke/joke.component';
+import { FavouriteJokesComponent } from './components/favourite-jokes/favourite-jokes.component';
+import { JokeComponent } from './components/joke/joke.component';
 
 const routes: Routes = [
   { path: '', component: JokeComponent },

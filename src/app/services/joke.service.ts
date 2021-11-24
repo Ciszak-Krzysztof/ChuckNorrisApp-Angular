@@ -28,17 +28,15 @@ export class JokeService {
     firstName: string,
     lastName: string
   ): Observable<Joke> {
+    let fetchURL = `${API.RANDOMJOKE}?firstName=${firstName}&lastName=${lastName}&escape=javascript`;
+    fetchURL = category === '' ? fetchURL : `${fetchURL}&limitTo=${category}`;
     if (category === '') {
       return this.httpClient
-        .get<JokeResult>(
-          `${API.RANDOMJOKE}?firstName=${firstName}&lastName=${lastName}&escape=javascript`
-        )
+        .get<JokeResult>(fetchURL)
         .pipe(map((result) => result.value));
     } else {
       return this.httpClient
-        .get<JokeResult>(
-          `${API.RANDOMJOKE}?firstName=${firstName}&lastName=${lastName}&limitTo=${category}&escape=javascript`
-        )
+        .get<JokeResult>(fetchURL)
         .pipe(map((result) => result.value));
     }
   }
@@ -49,17 +47,15 @@ export class JokeService {
     lastName: string,
     jokesAmount: number
   ): Observable<Joke[]> {
+    let fetchURL = `${API.RANDOMJOKE}/${jokesAmount}?firstName=${firstName}&lastName=${lastName}&escape=javascript`;
+    fetchURL = category === '' ? fetchURL : `${fetchURL}&limitTo=${category}`;
     if (category === '') {
       return this.httpClient
-        .get<SaveResult>(
-          `${API.RANDOMJOKE}/${jokesAmount}?firstName=${firstName}&lastName=${lastName}&escape=javascript`
-        )
+        .get<SaveResult>(fetchURL)
         .pipe(map((result) => result.value));
     } else {
       return this.httpClient
-        .get<SaveResult>(
-          `${API.RANDOMJOKE}/${jokesAmount}?firstName=${firstName}&lastName=${lastName}&limitTo=${category}&escape=javascript`
-        )
+        .get<SaveResult>(fetchURL)
         .pipe(map((result) => result.value));
     }
   }
