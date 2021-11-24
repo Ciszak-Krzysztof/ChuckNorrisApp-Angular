@@ -59,7 +59,6 @@ export class JokeSaveComponent implements OnInit {
     for (let joke of this.savedJokes) {
       this.convertedJokes += `${joke.joke} \n `;
     }
-    console.log(this.convertedJokes);
   }
 
   saveStringToFile(text: string) {

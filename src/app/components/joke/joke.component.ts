@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { JokeService } from '../services/joke.service';
-import { Joke } from '../models/Joke.model';
-import { FavouriteJokesService } from '../services/favourite-jokes.service';
+import { JokeService } from '../../services/joke.service';
+import { Joke } from '../../models/Joke.model';
+import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 
 @Component({
   selector: 'app-joke',

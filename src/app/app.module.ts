@@ -16,15 +16,15 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { JokeComponent } from './joke/joke.component';
+import { JokeComponent } from './components/joke/joke.component';
 import { JokeService } from './services/joke.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HeaderComponent } from './header/header.component';
-import { FavouriteJokesComponent } from './favourite-jokes/favourite-jokes.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FavouriteJokesComponent } from './components/favourite-jokes/favourite-jokes.component';
 import { FavouriteJokesService } from './services/favourite-jokes.service';
-import { JokeImageComponent } from './joke/joke-image/joke-image.component';
-import { JokeCategoryComponent } from './joke/joke-category/joke-category.component';
-import { JokeSaveComponent } from './joke/joke-save/joke-save.component';
+import { JokeImageComponent } from './components/joke/joke-image/joke-image.component';
+import { JokeCategoryComponent } from './components/joke/joke-category/joke-category.component';
+import { JokeSaveComponent } from './components/joke/joke-save/joke-save.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
