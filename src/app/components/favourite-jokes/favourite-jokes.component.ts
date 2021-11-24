@@ -21,12 +21,9 @@ export class FavouriteJokesComponent implements OnInit, OnDestroy {
     this.favouriteJokes = this.favouriteService.getFavouriteJokes();
     this.subscription = this.favouriteService.jokesChanged.subscribe(
       (jokes: Joke[]) => {
-        this.favouriteJokes = jokes;
+        (this.favouriteJokes = jokes), (this.isLoading = false);
       }
     );
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 250);
   }
 
   onDeleteJoke(index: number): void {
