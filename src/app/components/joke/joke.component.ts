@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { JokeService } from '../services/joke.service';
-import { Joke } from '../models/Joke.model';
-import { FavouriteJokesService } from '../services/favourite-jokes.service';
+import { JokeService } from '../../services/joke.service';
+import { Joke } from '../../models/Joke.model';
+import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 
 @Component({
   selector: 'app-joke',
@@ -62,12 +62,12 @@ export class JokeComponent implements OnInit {
     }
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
-      .subscribe((joke: Joke) => (this.joke = joke));
-    setTimeout(() => {
-      if (!this.favouriteService.favouriteCheck(this.joke)) {
-        this.isFavourite = false ?? true;
+      .subscribe((joke: Joke) => {
+        (this.joke = joke),
+          (this.isFavourite = !this.favouriteService.favouriteCheck(this.joke)
+            ? false
+            : true);
         this.isLoading = false;
-      }
-    }, 250);
+      });
   }
 }

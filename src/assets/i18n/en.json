@@ -11,5 +11,6 @@
     "drawJoke": "Draw a random",
     "joke": "Joke"
   },
-  "favouriteJokes": "Favourite Jokes"
+  "favouriteJokes": "Favourite Jokes",
+  "saveJokesButton": "Save Jokes"
 }

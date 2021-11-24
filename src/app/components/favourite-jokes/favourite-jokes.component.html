@@ -6,11 +6,10 @@
   <mat-card
     class="joke-container"
     *ngFor="let favouriteJoke of favouriteJokes; let i = index"
-    (click)="onDeleteJoke(i)"
   >
     <span>{{ favouriteJoke.joke }}</span>
     <span class="button">
-      <button mat-mini-fab color="basic">
+      <button (click)="onDeleteJoke(i)" mat-mini-fab color="basic">
         <mat-icon>delete</mat-icon>
       </button>
     </span>

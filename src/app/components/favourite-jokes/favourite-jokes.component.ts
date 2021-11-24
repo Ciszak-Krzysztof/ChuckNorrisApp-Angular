@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Joke } from '../models/Joke.model';
+import { Joke } from '../../models/Joke.model';
 
-import { FavouriteJokesService } from '../services/favourite-jokes.service';
+import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 
 @Component({
   selector: 'app-favourite-jokes',

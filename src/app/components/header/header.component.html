@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
-  <!-- <span class="appTitle">Chuck Norris Joke App</span> -->
-  <span class="appTitle">{{ "header.appName" | translate }}</span>
+  <span class="appTitle">
+    <a routerLink="/">{{ "header.appName" | translate }}</a>
+  </span>
   <span class="example-spacer"></span>
   <span>
     <a
@@ -21,7 +22,7 @@
     (ngModelChange)="selectLanguage($event)"
     class="languagePicker"
   >
-    <mat-option value="en">EN</mat-option>
-    <mat-option value="pl">PL</mat-option>
+    <mat-option style="font-size: 1.2vh" value="en">EN</mat-option>
+    <mat-option style="font-size: 1.2vh" value="pl">PL</mat-option>
   </mat-select>
 </mat-toolbar>
