@@ -36,14 +36,14 @@ export class JokeSaveComponent implements OnInit {
         this.joke.lastName,
         this.jokesAmount
       )
-      .subscribe((jokes: Joke[]) => (this.savedJokes = jokes));
-
-    //having issue with async of void function to have perfectly smooth flow, used setTimeout() as for now
-    setTimeout(() => {
-      this.convertJokesToString();
-      this.saveStringToFile(this.convertedJokes);
-      this.joke.isLoading = false;
-    }, 200);
+      .subscribe(
+        (jokes: Joke[]) => (
+          (this.savedJokes = jokes),
+          this.convertJokesToString(),
+          this.saveStringToFile(this.convertedJokes),
+          (this.joke.isLoading = false)
+        )
+      );
   }
 
   onAddJokesAmount(): void {
@@ -56,7 +56,7 @@ export class JokeSaveComponent implements OnInit {
 
   convertJokesToString(): void {
     this.convertedJokes = '';
-    for (let joke of this.savedJokes) {
+    for (const joke of this.savedJokes) {
       this.convertedJokes += `${joke.joke} \n `;
     }
   }
@@ -66,7 +66,7 @@ export class JokeSaveComponent implements OnInit {
       console.log('There are no jokes to save');
       return;
     }
-    let blob = new Blob([text], { type: 'text/plain' });
+    const blob = new Blob([text], { type: 'text/plain' });
     FileSaver.saveAs(blob, 'jokes.txt');
   }
 }

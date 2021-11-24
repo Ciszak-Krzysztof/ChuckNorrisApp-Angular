@@ -62,12 +62,12 @@ export class JokeComponent implements OnInit {
     }
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
-      .subscribe((joke: Joke) => (this.joke = joke));
-    setTimeout(() => {
-      if (!this.favouriteService.favouriteCheck(this.joke)) {
-        this.isFavourite = false ?? true;
+      .subscribe((joke: Joke) => {
+        (this.joke = joke),
+          (this.isFavourite = !this.favouriteService.favouriteCheck(this.joke)
+            ? false
+            : true);
         this.isLoading = false;
-      }
-    }, 250);
+      });
   }
 }
