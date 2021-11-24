@@ -11,5 +11,6 @@
     "drawJoke": "Pobierz losowy dowcip o",
     "joke": ""
   },
-  "favouriteJokes": "Ulubione dowcipy"
+  "favouriteJokes": "Ulubione dowcipy",
+  "saveJokesButton": "Zapisz dowcipy"
 }
