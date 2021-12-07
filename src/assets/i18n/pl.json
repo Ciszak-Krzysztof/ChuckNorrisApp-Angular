@@ -5,7 +5,8 @@
     "favJokesNav": "Ulubione dowcipy",
     "settingsNav": "Ustawienia"
   },
-  "jokeCategory": "Wybierz kategorię",
+  "jokeCategorySelect": "Wybierz kategorię",
+  "jokeCategory": "Brak wybranej kategorii",
   "joke": {
     "impersonate": "Podszyj się pod Chucka Norrisa",
     "drawJoke": "Pobierz losowy dowcip o",

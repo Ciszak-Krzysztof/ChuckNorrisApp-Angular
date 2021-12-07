@@ -5,7 +5,8 @@
     "favJokesNav": "Favourite Jokes",
     "settingsNav": "Settings"
   },
-  "jokeCategory": "Select category",
+  "jokeCategorySelect": "Select category",
+  "jokeCategory": "No category selected",
   "joke": {
     "impersonate": "Impersonate Chuck Norris",
     "drawJoke": "Draw a random",
