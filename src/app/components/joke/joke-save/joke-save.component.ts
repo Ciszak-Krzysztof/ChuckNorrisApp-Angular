@@ -41,7 +41,8 @@ export class JokeSaveComponent implements OnInit {
           (this.savedJokes = jokes),
           this.convertJokesToString(),
           this.saveStringToFile(this.convertedJokes),
-          (this.joke.isLoading = false)
+          (this.joke.isLoading = false),
+          (this.joke.selectedCategory = '')
         )
       );
   }

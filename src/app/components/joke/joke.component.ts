@@ -30,14 +30,12 @@ export class JokeComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
-      this.joke = joke;
+      (this.joke = joke),
+        (this.isFavourite = !this.favouriteService.favouriteCheck(this.joke)
+          ? false
+          : true);
+      this.isLoading = false;
     });
-    setTimeout(() => {
-      if (!this.favouriteService.favouriteCheck(this.joke)) {
-        this.isFavourite = false ?? true;
-        this.isLoading = false;
-      }
-    }, 250);
   }
 
   public onToggleFavourite(): void {

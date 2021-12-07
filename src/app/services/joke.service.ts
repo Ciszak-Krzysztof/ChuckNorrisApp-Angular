@@ -30,15 +30,9 @@ export class JokeService {
   ): Observable<Joke> {
     let fetchURL = `${API.RANDOMJOKE}?firstName=${firstName}&lastName=${lastName}&escape=javascript`;
     fetchURL = category === '' ? fetchURL : `${fetchURL}&limitTo=${category}`;
-    if (category === '') {
-      return this.httpClient
-        .get<JokeResult>(fetchURL)
-        .pipe(map((result) => result.value));
-    } else {
-      return this.httpClient
-        .get<JokeResult>(fetchURL)
-        .pipe(map((result) => result.value));
-    }
+    return this.httpClient
+      .get<JokeResult>(fetchURL)
+      .pipe(map((result) => result.value));
   }
 
   getManyJokes(
@@ -49,14 +43,8 @@ export class JokeService {
   ): Observable<Joke[]> {
     let fetchURL = `${API.RANDOMJOKE}/${jokesAmount}?firstName=${firstName}&lastName=${lastName}&escape=javascript`;
     fetchURL = category === '' ? fetchURL : `${fetchURL}&limitTo=${category}`;
-    if (category === '') {
-      return this.httpClient
-        .get<SaveResult>(fetchURL)
-        .pipe(map((result) => result.value));
-    } else {
-      return this.httpClient
-        .get<SaveResult>(fetchURL)
-        .pipe(map((result) => result.value));
-    }
+    return this.httpClient
+      .get<SaveResult>(fetchURL)
+      .pipe(map((result) => result.value));
   }
 }
