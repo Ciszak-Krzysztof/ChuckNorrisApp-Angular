@@ -1,13 +1,11 @@
 <mat-form-field class="full-width" appearance="fill">
-  <mat-label>{{ "jokeCategory" | translate }}</mat-label>
+  <mat-label>{{ "jokeCategorySelect" | translate }}</mat-label>
   <mat-select
     [ngModel]="selectedCategory"
     [ngModelOptions]="{ standalone: true }"
     (ngModelChange)="onValueChanged($event)"
   >
-    <mat-option value="option1" disabled>{{
-      "jokeCategory" | translate
-    }}</mat-option>
+    <mat-option value="">{{ "jokeCategory" | translate }}</mat-option>
     <mat-option *ngFor="let category of categories" [value]="category">{{
       category
     }}</mat-option>

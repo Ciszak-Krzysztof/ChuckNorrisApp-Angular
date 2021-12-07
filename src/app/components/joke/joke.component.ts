@@ -66,7 +66,7 @@ export class JokeComponent implements OnInit {
             ? false
             : true);
         this.isLoading = false;
-        this.selectedCategory = '';
+        // this.selectedCategory = '';
       });
   }
 }
