@@ -1,9 +1,6 @@
-import { Subject } from 'rxjs';
-
 import { Joke } from '../models/Joke.model';
 
 export class FavouriteJokesService {
-  public jokesChanged = new Subject<Joke[]>();
   private favouriteJokes: Joke[] = [];
 
   getFavouriteJokes(): Joke[] {
@@ -33,7 +30,6 @@ export class FavouriteJokesService {
     const data = [...favJokes, joke];
     localStorage.setItem('favouriteJokes', JSON.stringify(data));
     this.favouriteJokes.push(joke);
-    this.jokesChanged.next(this.favouriteJokes);
   }
 
   deleteFavouriteJoke(index: number): void {
@@ -43,6 +39,5 @@ export class FavouriteJokesService {
     favJokes.splice(index, 1);
     localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
     this.favouriteJokes.splice(index, 1);
-    this.jokesChanged.next(this.favouriteJokes);
   }
 }
