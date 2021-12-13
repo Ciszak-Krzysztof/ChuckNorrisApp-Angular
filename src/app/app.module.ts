@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { FavouriteJokesService } from './services/favourite-jokes.service';
 import { JokeImageComponent } from './components/joke/joke-image/joke-image.component';
 import { JokeCategoryComponent } from './components/joke/joke-category/joke-category.component';
 import { JokeSaveComponent } from './components/joke/joke-save/joke-save.component';
+import * as fromApp from './store/app.reducer';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    StoreModule.forRoot(fromApp.appReducer),
     BrowserAnimationsModule,
     MatCardModule,
     MatInputModule,

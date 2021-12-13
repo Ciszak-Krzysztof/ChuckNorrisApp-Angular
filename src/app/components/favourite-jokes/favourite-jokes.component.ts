@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Joke } from '../../models/Joke.model';
 
 import { FavouriteJokesService } from '../../services/favourite-jokes.service';
+import * as fromApp from '../../store/app.reducer';
 
 @Component({
   selector: 'app-favourite-jokes',
@@ -10,12 +13,16 @@ import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 })
 export class FavouriteJokesComponent implements OnInit {
   public isLoading: boolean = false;
-  public favouriteJokes: Joke[] = [];
+  public declare favouriteJokes: Observable<{ favouriteJokes: Joke[] }>;
 
-  constructor(private favouriteService: FavouriteJokesService) {}
+  constructor(
+    private favouriteService: FavouriteJokesService,
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit(): void {
-    this.favouriteJokes = this.favouriteService.getFavouriteJokes();
+    this.favouriteJokes = this.store.select('joke');
+    // this.favouriteJokes = this.favouriteService.getFavouriteJokes();
   }
 
   onDeleteJoke(index: number): void {

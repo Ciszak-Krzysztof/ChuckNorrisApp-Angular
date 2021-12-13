@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { JokeService } from '../../services/joke.service';
 import { Joke } from '../../models/Joke.model';
 import { FavouriteJokesService } from '../../services/favourite-jokes.service';
+import * as fromApp from '../../store/app.reducer';
 
 @Component({
   selector: 'app-joke',
@@ -24,7 +26,8 @@ export class JokeComponent implements OnInit {
 
   constructor(
     private jokeService: JokeService,
-    private favouriteService: FavouriteJokesService
+    private favouriteService: FavouriteJokesService,
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit(): void {
