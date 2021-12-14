@@ -5,6 +5,7 @@ import { JokeService } from '../../services/joke.service';
 import { Joke } from '../../models/Joke.model';
 import { FavouriteJokesService } from '../../services/favourite-jokes.service';
 import * as fromApp from '../../store/app.reducer';
+import * as JokeActions from '../../store/joke.actions';
 
 @Component({
   selector: 'app-joke',
@@ -42,7 +43,16 @@ export class JokeComponent implements OnInit {
   }
 
   public onToggleFavourite(): void {
-    this.favouriteService.toggleFavouriteJoke(this.joke);
+    console.log(!this.favouriteService.favouriteCheck(this.joke));
+    if (!this.favouriteService.favouriteCheck(this.joke)) {
+      this.store.dispatch(new JokeActions.AddFavouriteJoke(this.joke));
+    } else {
+      // const index: number = this.favouriteJokes.findIndex(
+      //   (newJoke) => newJoke.id === this.joke.id
+      // );
+      this.store.dispatch(new JokeActions.DeleteFavouriteJoke(0));
+    }
+    // this.favouriteService.toggleFavouriteJoke(this.joke);
     this.isFavourite = !this.isFavourite;
   }
 

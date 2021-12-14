@@ -30,13 +30,20 @@ const initialState: State = {
 
 export function jokeReducer(
   state: State = initialState,
-  action: JokeActions.AddFavouriteJoke
+  action: JokeActions.JokeActions
 ): State {
   switch (action.type) {
     case JokeActions.ADD_FAVOURITE_JOKE:
       return {
         ...state,
         favouriteJokes: [...state.favouriteJokes, action.payload],
+      };
+    case JokeActions.DELETE_FAVOURITE_JOKE:
+      return {
+        ...state,
+        favouriteJokes: state.favouriteJokes.filter((joke, jokeIndex) => {
+          return jokeIndex !== action.payload;
+        }),
       };
     default:
       return state;
