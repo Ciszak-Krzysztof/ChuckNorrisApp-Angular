@@ -23,6 +23,11 @@ export class FavouriteJokesComponent implements OnInit {
   }
 
   onDeleteJoke(index: number): void {
+    const favJokes: Joke[] = JSON.parse(
+      localStorage.getItem('favouriteJokes') || '[]'
+    );
+    favJokes.splice(index, 1);
+    localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
     this.store.dispatch(new JokeActions.DeleteFavouriteJoke(index));
   }
 }
