@@ -5,7 +5,10 @@
   <h2>{{ "favouriteJokes" | translate }}</h2>
   <mat-card
     class="joke-container"
-    *ngFor="let favouriteJoke of favouriteJokes; let i = index"
+    *ngFor="
+      let favouriteJoke of (favouriteJokes | async)?.favouriteJokes;
+      let i = index
+    "
   >
     <span>{{ favouriteJoke.joke }}</span>
     <span class="button">

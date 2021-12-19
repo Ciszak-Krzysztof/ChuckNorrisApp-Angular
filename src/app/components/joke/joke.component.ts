@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { JokeService } from '../../services/joke.service';
 import { Joke } from '../../models/Joke.model';
-import { FavouriteJokesService } from '../../services/favourite-jokes.service';
+import * as fromApp from '../../store/app.reducer';
+import * as JokeActions from '../../store/joke.actions';
 
 @Component({
   selector: 'app-joke',
@@ -10,6 +12,7 @@ import { FavouriteJokesService } from '../../services/favourite-jokes.service';
   styleUrls: ['./joke.component.css'],
 })
 export class JokeComponent implements OnInit {
+  public favouriteJokes: Joke[] = [];
   public isLoading: boolean = false;
   public impersonateName: string = '';
   public isChuck: boolean = true;
@@ -24,25 +27,42 @@ export class JokeComponent implements OnInit {
 
   constructor(
     private jokeService: JokeService,
-    private favouriteService: FavouriteJokesService
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit(): void {
+    this.store
+      .select('joke')
+      .subscribe((favJokes) => (this.favouriteJokes = favJokes.favouriteJokes));
     this.isLoading = true;
     this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
       (this.joke = joke),
-        (this.isFavourite = !this.favouriteService.favouriteCheck(this.joke)
-          ? false
-          : true);
+        (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
       this.isLoading = false;
     });
   }
 
   public onToggleFavourite(): void {
-    this.favouriteService.toggleFavouriteJoke(this.joke);
+    if (!this.favouriteCheck(this.joke)) {
+      const favJokes = JSON.parse(
+        localStorage.getItem('favouriteJokes') || '[]'
+      );
+      const data = [...favJokes, this.joke];
+      localStorage.setItem('favouriteJokes', JSON.stringify(data));
+      this.store.dispatch(new JokeActions.AddFavouriteJoke(this.joke));
+    } else {
+      const index: number = this.favouriteJokes.findIndex(
+        (newJoke) => newJoke.id === this.joke.id
+      );
+      const favJokes: Joke[] = JSON.parse(
+        localStorage.getItem('favouriteJokes') || '[]'
+      );
+      favJokes.splice(index, 1);
+      localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
+      this.store.dispatch(new JokeActions.DeleteFavouriteJoke(index));
+    }
     this.isFavourite = !this.isFavourite;
   }
-
   public selectCategory(category: string) {
     this.selectedCategory = category;
   }
@@ -62,10 +82,16 @@ export class JokeComponent implements OnInit {
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
       .subscribe((joke: Joke) => {
         (this.joke = joke),
-          (this.isFavourite = !this.favouriteService.favouriteCheck(this.joke)
-            ? false
-            : true);
+          (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
         this.isLoading = false;
       });
+  }
+
+  public favouriteCheck(joke: Joke) {
+    let favouriteJokes: Joke[] = [];
+    this.store
+      .select('joke')
+      .subscribe((favJokes) => (favouriteJokes = favJokes.favouriteJokes));
+    return favouriteJokes.find((newjoke) => newjoke.id === joke.id);
   }
 }
