@@ -18,6 +18,7 @@ export class FavouriteJokesComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
+    this.store.dispatch(new JokeActions.GetFavouriteJokes());
     this.favouriteJokes = this.store.select('joke');
   }
 

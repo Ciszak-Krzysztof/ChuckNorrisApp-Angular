@@ -22,7 +22,6 @@ import { JokeService } from './services/joke.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { FavouriteJokesComponent } from './components/favourite-jokes/favourite-jokes.component';
-import { FavouriteJokesService } from './services/favourite-jokes.service';
 import { JokeImageComponent } from './components/joke/joke-image/joke-image.component';
 import { JokeCategoryComponent } from './components/joke/joke-category/joke-category.component';
 import { JokeSaveComponent } from './components/joke/joke-save/joke-save.component';
@@ -66,7 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       defaultLanguage: 'en',
     }),
   ],
-  providers: [JokeService, FavouriteJokesService],
+  providers: [JokeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

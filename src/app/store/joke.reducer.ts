@@ -17,7 +17,7 @@ const initialState: State = {
   isLoading: false,
   isChuck: true,
   isFavourite: false,
-  favouriteJokes: [{ id: 123, joke: 'random test joke' }],
+  favouriteJokes: [],
   joke: {
     id: 0,
     joke: '',
@@ -44,6 +44,13 @@ export function jokeReducer(
         favouriteJokes: state.favouriteJokes.filter((joke, jokeIndex) => {
           return jokeIndex !== action.payload;
         }),
+      };
+    case JokeActions.GET_FAVOURITE_JOKES:
+      return {
+        ...state,
+        favouriteJokes: JSON.parse(
+          localStorage.getItem('favouriteJokes') || '[]'
+        ),
       };
     default:
       return state;
