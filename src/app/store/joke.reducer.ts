@@ -1,3 +1,4 @@
+import { createReducer, on } from '@ngrx/store';
 import { Joke } from '../models/Joke.model';
 import * as JokeActions from './joke.actions';
 
@@ -28,31 +29,20 @@ const initialState: State = {
   lastName: 'Norris',
 };
 
-export function jokeReducer(
-  state: State = initialState,
-  action: JokeActions.JokeActions
-): State {
-  switch (action.type) {
-    case JokeActions.ADD_FAVOURITE_JOKE:
-      return {
-        ...state,
-        favouriteJokes: [...state.favouriteJokes, action.payload],
-      };
-    case JokeActions.DELETE_FAVOURITE_JOKE:
-      return {
-        ...state,
-        favouriteJokes: state.favouriteJokes.filter((joke, jokeIndex) => {
-          return jokeIndex !== action.payload;
-        }),
-      };
-    case JokeActions.GET_FAVOURITE_JOKES:
-      return {
-        ...state,
-        favouriteJokes: JSON.parse(
-          localStorage.getItem('favouriteJokes') || '[]'
-        ),
-      };
-    default:
-      return state;
-  }
-}
+export const jokeReducer = createReducer(
+  initialState,
+  on(JokeActions.addFavouriteJoke, (state, { joke }) => ({
+    ...state,
+    favouriteJokes: [...state.favouriteJokes, joke],
+  })),
+  on(JokeActions.deleteFavouriteJoke, (state, { index }) => ({
+    ...state,
+    favouriteJokes: state.favouriteJokes.filter((joke, jokeIndex) => {
+      return jokeIndex !== index;
+    }),
+  })),
+  on(JokeActions.getFavouriteJokes, (state) => ({
+    ...state,
+    favouriteJokes: JSON.parse(localStorage.getItem('favouriteJokes') || '[]'),
+  }))
+);
