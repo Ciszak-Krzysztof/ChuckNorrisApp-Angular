@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { JokeService } from '../../services/joke.service';
 import { Joke } from '../../models/Joke.model';
 import * as fromApp from '../../store/app.reducer';
 import * as JokeActions from '../../store/joke.actions';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-joke',
   templateUrl: './joke.component.html',
   styleUrls: ['./joke.component.css'],
 })
-export class JokeComponent implements OnInit {
+export class JokeComponent implements OnInit, OnDestroy {
+  private ngDestroyed$ = new Subject();
   public favouriteJokes: Joke[] = [];
   public isLoading: boolean = false;
   public impersonateName: string = '';
@@ -33,13 +36,17 @@ export class JokeComponent implements OnInit {
   ngOnInit(): void {
     this.store
       .select('joke')
+      .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((favJokes) => (this.favouriteJokes = favJokes.favouriteJokes));
     this.isLoading = true;
-    this.jokeService.getRandomJoke().subscribe((joke: Joke) => {
-      (this.joke = joke),
-        (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
-      this.isLoading = false;
-    });
+    this.jokeService
+      .getRandomJoke()
+      .pipe(takeUntil(this.ngDestroyed$))
+      .subscribe((joke: Joke) => {
+        (this.joke = joke),
+          (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
+        this.isLoading = false;
+      });
   }
 
   public onToggleFavourite(): void {
@@ -80,6 +87,7 @@ export class JokeComponent implements OnInit {
     }
     this.jokeService
       .getJoke(this.selectedCategory, this.firstName, this.lastName)
+      .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((joke: Joke) => {
         (this.joke = joke),
           (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
@@ -91,7 +99,13 @@ export class JokeComponent implements OnInit {
     let favouriteJokes: Joke[] = [];
     this.store
       .select('joke')
+      .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((favJokes) => (favouriteJokes = favJokes.favouriteJokes));
     return favouriteJokes.find((newjoke) => newjoke.id === joke.id);
+  }
+
+  ngOnDestroy() {
+    this.ngDestroyed$.next();
+    this.ngDestroyed$.complete();
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Joke } from '../../models/Joke.model';
 
 import * as fromApp from '../../store/app.reducer';
@@ -11,15 +12,19 @@ import * as JokeActions from '../../store/joke.actions';
   templateUrl: './favourite-jokes.component.html',
   styleUrls: ['./favourite-jokes.component.css'],
 })
-export class FavouriteJokesComponent implements OnInit {
+export class FavouriteJokesComponent implements OnInit, OnDestroy {
+  private ngDestroyed$ = new Subject();
   public isLoading: boolean = false;
-  public declare favouriteJokes: Observable<{ favouriteJokes: Joke[] }>;
+  public declare favouriteJokes: Joke[];
 
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(JokeActions.getFavouriteJokes());
-    this.favouriteJokes = this.store.select('joke');
+    this.store
+      .select('joke')
+      .pipe(takeUntil(this.ngDestroyed$))
+      .subscribe((joke) => (this.favouriteJokes = joke.favouriteJokes));
   }
 
   onDeleteJoke(index: number): void {
@@ -29,5 +34,10 @@ export class FavouriteJokesComponent implements OnInit {
     favJokes.splice(index, 1);
     localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
     this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
+  }
+
+  ngOnDestroy() {
+    this.ngDestroyed$.next();
+    this.ngDestroyed$.complete();
   }
 }
