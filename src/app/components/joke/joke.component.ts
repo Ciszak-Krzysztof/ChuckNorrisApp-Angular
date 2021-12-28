@@ -49,7 +49,7 @@ export class JokeComponent implements OnInit {
       );
       const data = [...favJokes, this.joke];
       localStorage.setItem('favouriteJokes', JSON.stringify(data));
-      this.store.dispatch(new JokeActions.AddFavouriteJoke(this.joke));
+      this.store.dispatch(JokeActions.addFavouriteJoke({ joke: this.joke }));
     } else {
       const index: number = this.favouriteJokes.findIndex(
         (newJoke) => newJoke.id === this.joke.id
@@ -59,7 +59,7 @@ export class JokeComponent implements OnInit {
       );
       favJokes.splice(index, 1);
       localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
-      this.store.dispatch(new JokeActions.DeleteFavouriteJoke(index));
+      this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
     }
     this.isFavourite = !this.isFavourite;
   }

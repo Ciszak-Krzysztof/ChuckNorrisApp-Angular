@@ -18,7 +18,7 @@ export class FavouriteJokesComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new JokeActions.GetFavouriteJokes());
+    this.store.dispatch(JokeActions.getFavouriteJokes());
     this.favouriteJokes = this.store.select('joke');
   }
 
@@ -28,6 +28,6 @@ export class FavouriteJokesComponent implements OnInit {
     );
     favJokes.splice(index, 1);
     localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
-    this.store.dispatch(new JokeActions.DeleteFavouriteJoke(index));
+    this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
   }
 }
