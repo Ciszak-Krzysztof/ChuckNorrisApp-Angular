@@ -12,6 +12,7 @@ export interface State {
   categories: string[];
   firstName: string;
   lastName: string;
+  jokes: Joke[];
 }
 
 const initialState: State = {
@@ -27,6 +28,7 @@ const initialState: State = {
   categories: [],
   firstName: 'Chuck',
   lastName: 'Norris',
+  jokes: [],
 };
 
 export const jokeReducer = createReducer(
@@ -44,5 +46,21 @@ export const jokeReducer = createReducer(
   on(JokeActions.getFavouriteJokes, (state) => ({
     ...state,
     favouriteJokes: JSON.parse(localStorage.getItem('favouriteJokes') || '[]'),
+  })),
+  on(JokeActions.getRandomJokeSuccess, (state, { joke }) => ({
+    ...state,
+    joke: joke,
+  })),
+  on(JokeActions.getJokeSuccess, (state, { joke }) => ({
+    ...state,
+    joke: joke,
+  })),
+  on(JokeActions.getManyJokesSuccess, (state, { jokes }) => ({
+    ...state,
+    jokes: jokes,
+  })),
+  on(JokeActions.getCategoriesSuccess, (state, { categories }) => ({
+    ...state,
+    categories: categories,
   }))
 );
