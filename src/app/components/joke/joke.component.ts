@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { JokeService } from '../../services/joke.service';
 import { Joke } from '../../models/Joke.model';
 import * as fromApp from '../../store/app.reducer';
 import * as JokeActions from '../../store/joke.actions';
@@ -28,23 +27,17 @@ export class JokeComponent implements OnInit, OnDestroy {
   public firstName: string = 'Chuck';
   public lastName: string = 'Norris';
 
-  constructor(
-    private jokeService: JokeService,
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.store.dispatch(JokeActions.getRandomJoke());
     this.store
       .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((favJokes) => (this.favouriteJokes = favJokes.favouriteJokes));
-    this.isLoading = true;
-    this.jokeService
-      .getRandomJoke()
-      .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((joke: Joke) => {
-        (this.joke = joke),
-          (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
+      .subscribe((jokeStore) => {
+        (this.favouriteJokes = jokeStore.favouriteJokes),
+          (this.joke = jokeStore.joke);
         this.isLoading = false;
       });
   }
@@ -85,23 +78,28 @@ export class JokeComponent implements OnInit, OnDestroy {
       this.firstName = 'Chuck';
       this.lastName = 'Norris';
     }
-    this.jokeService
-      .getJoke(this.selectedCategory, this.firstName, this.lastName)
+    this.store.dispatch(
+      JokeActions.getJoke({
+        category: this.selectedCategory,
+        firstName: this.firstName,
+        lastName: this.lastName,
+      })
+    );
+    this.store
+      .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((joke: Joke) => {
-        (this.joke = joke),
-          (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
+      .subscribe((jokeStore) => {
+        this.joke = jokeStore.joke;
         this.isLoading = false;
       });
   }
 
   public favouriteCheck(joke: Joke) {
-    let favouriteJokes: Joke[] = [];
     this.store
       .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((favJokes) => (favouriteJokes = favJokes.favouriteJokes));
-    return favouriteJokes.find((newjoke) => newjoke.id === joke.id);
+      .subscribe((favJokes) => (this.favouriteJokes = favJokes.favouriteJokes));
+    return this.favouriteJokes.find((newjoke) => newjoke.id === joke.id);
   }
 
   ngOnDestroy() {

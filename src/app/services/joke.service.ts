@@ -17,7 +17,7 @@ export class JokeService {
       .pipe(map((result) => result.value));
   }
 
-  getCategories(): Observable<String[]> {
+  getCategories(): Observable<string[]> {
     return this.httpClient
       .get<any>(API.CATEGORIES)
       .pipe(map((result) => result.value));
