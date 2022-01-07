@@ -37,32 +37,23 @@ export class JokeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((jokeStore) => {
         (this.favouriteJokes = jokeStore.favouriteJokes),
-          (this.joke = jokeStore.joke);
+          (this.joke = jokeStore.joke),
+          (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
         this.isLoading = false;
       });
   }
 
   public onToggleFavourite(): void {
     if (!this.favouriteCheck(this.joke)) {
-      const favJokes = JSON.parse(
-        localStorage.getItem('favouriteJokes') || '[]'
-      );
-      const data = [...favJokes, this.joke];
-      localStorage.setItem('favouriteJokes', JSON.stringify(data));
       this.store.dispatch(JokeActions.addFavouriteJoke({ joke: this.joke }));
     } else {
       const index: number = this.favouriteJokes.findIndex(
         (newJoke) => newJoke.id === this.joke.id
       );
-      const favJokes: Joke[] = JSON.parse(
-        localStorage.getItem('favouriteJokes') || '[]'
-      );
-      favJokes.splice(index, 1);
-      localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
       this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
     }
-    this.isFavourite = !this.isFavourite;
   }
+
   public selectCategory(category: string) {
     this.selectedCategory = category;
   }

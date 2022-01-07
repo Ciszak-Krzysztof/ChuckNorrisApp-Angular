@@ -28,6 +28,8 @@ import { JokeImageComponent } from './components/joke/joke-image/joke-image.comp
 import { JokeCategoryComponent } from './components/joke/joke-category/joke-category.component';
 import { JokeSaveComponent } from './components/joke/joke-save/joke-save.component';
 import { JokeEffects } from './store/joke.effects';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -48,6 +50,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([JokeEffects]),
+    StoreModule.forRoot(fromApp.appReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
+    }),
     BrowserAnimationsModule,
     MatCardModule,
     MatInputModule,
