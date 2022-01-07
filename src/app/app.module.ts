@@ -48,7 +48,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([JokeEffects]),
     StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({

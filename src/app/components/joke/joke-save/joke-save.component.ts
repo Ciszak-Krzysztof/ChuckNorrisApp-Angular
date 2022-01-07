@@ -45,11 +45,15 @@ export class JokeSaveComponent implements OnInit, OnDestroy {
   }
 
   onAddJokesAmount(): void {
-    this.jokesAmount < 100 ? this.jokesAmount++ : this.jokesAmount;
+    if (this.jokesAmount < 100) {
+      this.jokesAmount++;
+    }
   }
 
   onReduceJokesAmount(): void {
-    this.jokesAmount > 0 ? this.jokesAmount-- : this.jokesAmount;
+    if (this.jokesAmount > 0) {
+      this.jokesAmount--;
+    }
   }
 
   ngOnDestroy() {
