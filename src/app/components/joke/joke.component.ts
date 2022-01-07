@@ -45,21 +45,11 @@ export class JokeComponent implements OnInit, OnDestroy {
 
   public onToggleFavourite(): void {
     if (!this.favouriteCheck(this.joke)) {
-      const favJokes = JSON.parse(
-        localStorage.getItem('favouriteJokes') || '[]'
-      );
-      const data = [...favJokes, this.joke];
-      localStorage.setItem('favouriteJokes', JSON.stringify(data));
       this.store.dispatch(JokeActions.addFavouriteJoke({ joke: this.joke }));
     } else {
       const index: number = this.favouriteJokes.findIndex(
         (newJoke) => newJoke.id === this.joke.id
       );
-      const favJokes: Joke[] = JSON.parse(
-        localStorage.getItem('favouriteJokes') || '[]'
-      );
-      favJokes.splice(index, 1);
-      localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
       this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
     }
   }
