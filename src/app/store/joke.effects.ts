@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, pipe } from 'rxjs';
+import * as FileSaver from 'file-saver';
+import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { Joke } from '../models/Joke.model';
 
@@ -52,6 +53,26 @@ export class JokeEffects {
           )
       )
     )
+  );
+
+  saveJokes = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(JokeActions.getManyJokesSuccess),
+        tap((action) => {
+          let convertedJokes: string = '';
+          for (const joke of action.jokes) {
+            convertedJokes += `${joke.joke} \n `;
+          }
+          if (!convertedJokes) {
+            console.log('There are no jokes to save');
+            return;
+          }
+          const blob = new Blob([convertedJokes], { type: 'text/plain' });
+          FileSaver.saveAs(blob, 'jokes.txt');
+        })
+      ),
+    { dispatch: false }
   );
 
   getCategories = createEffect(() =>
