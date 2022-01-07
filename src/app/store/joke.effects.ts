@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { EMPTY, pipe } from 'rxjs';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { Joke } from '../models/Joke.model';
 
 import { JokeService } from '../services/joke.service';
 import * as JokeActions from '../store/joke.actions';
@@ -19,6 +20,7 @@ export class JokeEffects {
       )
     )
   );
+
   getJoke = createEffect(() =>
     this.actions$.pipe(
       ofType(JokeActions.getJoke),
@@ -32,6 +34,7 @@ export class JokeEffects {
       )
     )
   );
+
   getManyJokes = createEffect(() =>
     this.actions$.pipe(
       ofType(JokeActions.getManyJokes),
@@ -50,6 +53,7 @@ export class JokeEffects {
       )
     )
   );
+
   getCategories = createEffect(() =>
     this.actions$.pipe(
       ofType(JokeActions.getCategories),
@@ -61,5 +65,36 @@ export class JokeEffects {
       )
     )
   );
+
+  addFavouriteJoke = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(JokeActions.addFavouriteJoke),
+        tap((action) => {
+          const favJokes = JSON.parse(
+            localStorage.getItem('favouriteJokes') || '[]'
+          );
+          const data = [...favJokes, action.joke];
+          localStorage.setItem('favouriteJokes', JSON.stringify(data));
+        })
+      ),
+    { dispatch: false }
+  );
+
+  deleteFavouriteJoke = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(JokeActions.deleteFavouriteJoke),
+        tap((action) => {
+          const favJokes: Joke[] = JSON.parse(
+            localStorage.getItem('favouriteJokes') || '[]'
+          );
+          favJokes.splice(action.index, 1);
+          localStorage.setItem('favouriteJokes', JSON.stringify(favJokes));
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(private actions$: Actions, private jokeService: JokeService) {}
 }
