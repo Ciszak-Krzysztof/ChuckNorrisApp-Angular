@@ -14,7 +14,7 @@ import * as JokeActions from '../../store/joke.actions';
 })
 export class FavouriteJokesComponent implements OnInit, OnDestroy {
   private ngDestroyed$ = new Subject();
-  public isLoading: boolean = false;
+  public isLoading = false;
   public declare favouriteJokes: Joke[];
 
   constructor(private store: Store<fromApp.AppState>) {}
@@ -31,7 +31,7 @@ export class FavouriteJokesComponent implements OnInit, OnDestroy {
     this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngDestroyed$.next();
     this.ngDestroyed$.complete();
   }

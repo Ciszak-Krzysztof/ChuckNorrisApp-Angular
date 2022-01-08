@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Joke } from 'src/app/models/Joke.model';
 import { JokeComponent } from '../joke.component';
 import { Store } from '@ngrx/store';
@@ -11,9 +11,9 @@ import { Subject } from 'rxjs';
   templateUrl: './joke-save.component.html',
   styleUrls: ['./joke-save.component.css'],
 })
-export class JokeSaveComponent implements OnInit, OnDestroy {
+export class JokeSaveComponent implements OnDestroy {
   private ngDestroyed$ = new Subject();
-  public jokesAmount: number = 0;
+  public jokesAmount = 0;
   public savedJokes: Joke[] = [];
 
   constructor(
@@ -21,9 +21,7 @@ export class JokeSaveComponent implements OnInit, OnDestroy {
     private joke: JokeComponent
   ) {}
 
-  ngOnInit(): void {}
-
-  saveJokes() {
+  saveJokes(): void {
     this.joke.isLoading = true;
     if (this.joke.impersonateName.length !== 0) {
       this.joke.isChuck = false;
@@ -45,14 +43,18 @@ export class JokeSaveComponent implements OnInit, OnDestroy {
   }
 
   onAddJokesAmount(): void {
-    this.jokesAmount < 100 ? this.jokesAmount++ : this.jokesAmount;
+    if (this.jokesAmount < 100) {
+      this.jokesAmount++;
+    }
   }
 
   onReduceJokesAmount(): void {
-    this.jokesAmount > 0 ? this.jokesAmount-- : this.jokesAmount;
+    if (this.jokesAmount > 0) {
+      this.jokesAmount--;
+    }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngDestroyed$.next();
     this.ngDestroyed$.complete();
   }

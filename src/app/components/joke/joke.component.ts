@@ -15,51 +15,49 @@ import { Subject } from 'rxjs';
 export class JokeComponent implements OnInit, OnDestroy {
   private ngDestroyed$ = new Subject();
   public favouriteJokes: Joke[] = [];
-  public isLoading: boolean = false;
-  public impersonateName: string = '';
-  public isChuck: boolean = true;
-  public isFavourite: boolean = false;
+  public isLoading = false;
+  public impersonateName = '';
+  public isChuck = true;
+  public isFavourite = false;
   public joke: Joke = {
     id: 0,
     joke: '',
   };
-  public selectedCategory: string = '';
-  public firstName: string = 'Chuck';
-  public lastName: string = 'Norris';
+  public selectedCategory = '';
+  public firstName = 'Chuck';
+  public lastName = 'Norris';
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store$: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.store.dispatch(JokeActions.getRandomJoke());
-    this.store
+    this.store$.dispatch(JokeActions.getRandomJoke());
+    this.store$
       .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((jokeStore) => {
         (this.favouriteJokes = jokeStore.favouriteJokes),
           (this.joke = jokeStore.joke),
+          (this.isLoading = jokeStore.isLoading),
           (this.isFavourite = !this.favouriteCheck(this.joke) ? false : true);
-        this.isLoading = false;
       });
   }
 
   public onToggleFavourite(): void {
     if (!this.favouriteCheck(this.joke)) {
-      this.store.dispatch(JokeActions.addFavouriteJoke({ joke: this.joke }));
+      this.store$.dispatch(JokeActions.addFavouriteJoke({ joke: this.joke }));
     } else {
       const index: number = this.favouriteJokes.findIndex(
         (newJoke) => newJoke.id === this.joke.id
       );
-      this.store.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
+      this.store$.dispatch(JokeActions.deleteFavouriteJoke({ index: index }));
     }
   }
 
-  public selectCategory(category: string) {
+  public selectCategory(category: string): void {
     this.selectedCategory = category;
   }
 
   public fetchJoke(): void {
-    this.isLoading = true;
     if (this.impersonateName.length !== 0) {
       this.isChuck = false;
       this.firstName = this.impersonateName.split(' ')[0];
@@ -69,31 +67,31 @@ export class JokeComponent implements OnInit, OnDestroy {
       this.firstName = 'Chuck';
       this.lastName = 'Norris';
     }
-    this.store.dispatch(
+    this.store$.dispatch(
       JokeActions.getJoke({
         category: this.selectedCategory,
         firstName: this.firstName,
         lastName: this.lastName,
       })
     );
-    this.store
+    this.store$
       .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((jokeStore) => {
         this.joke = jokeStore.joke;
-        this.isLoading = false;
+        this.isLoading = jokeStore.isLoading;
       });
   }
 
-  public favouriteCheck(joke: Joke) {
-    this.store
+  public favouriteCheck(joke: Joke): Joke | undefined {
+    this.store$
       .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((favJokes) => (this.favouriteJokes = favJokes.favouriteJokes));
     return this.favouriteJokes.find((newjoke) => newjoke.id === joke.id);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngDestroyed$.next();
     this.ngDestroyed$.complete();
   }
