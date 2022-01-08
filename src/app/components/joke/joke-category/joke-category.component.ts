@@ -38,7 +38,7 @@ export class JokeCategoryComponent implements OnInit, OnDestroy {
     this.selectedCategory.emit(selected);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngDestroyed$.next();
     this.ngDestroyed$.complete();
   }

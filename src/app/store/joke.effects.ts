@@ -60,7 +60,7 @@ export class JokeEffects {
       this.actions$.pipe(
         ofType(JokeActions.getManyJokesSuccess),
         tap((action) => {
-          let convertedJokes: string = '';
+          let convertedJokes = '';
           for (const joke of action.jokes) {
             convertedJokes += `${joke.joke} \n `;
           }

@@ -15,17 +15,17 @@ import { Subject } from 'rxjs';
 export class JokeComponent implements OnInit, OnDestroy {
   private ngDestroyed$ = new Subject();
   public favouriteJokes: Joke[] = [];
-  public isLoading: boolean = false;
-  public impersonateName: string = '';
-  public isChuck: boolean = true;
-  public isFavourite: boolean = false;
+  public isLoading = false;
+  public impersonateName = '';
+  public isChuck = true;
+  public isFavourite = false;
   public joke: Joke = {
     id: 0,
     joke: '',
   };
-  public selectedCategory: string = '';
-  public firstName: string = 'Chuck';
-  public lastName: string = 'Norris';
+  public selectedCategory = '';
+  public firstName = 'Chuck';
+  public lastName = 'Norris';
 
   constructor(private store$: Store<fromApp.AppState>) {}
 
@@ -53,7 +53,7 @@ export class JokeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public selectCategory(category: string) {
+  public selectCategory(category: string): void {
     this.selectedCategory = category;
   }
 
@@ -83,7 +83,7 @@ export class JokeComponent implements OnInit, OnDestroy {
       });
   }
 
-  public favouriteCheck(joke: Joke) {
+  public favouriteCheck(joke: Joke): Joke | undefined {
     this.store$
       .select('joke')
       .pipe(takeUntil(this.ngDestroyed$))
@@ -91,7 +91,7 @@ export class JokeComponent implements OnInit, OnDestroy {
     return this.favouriteJokes.find((newjoke) => newjoke.id === joke.id);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngDestroyed$.next();
     this.ngDestroyed$.complete();
   }

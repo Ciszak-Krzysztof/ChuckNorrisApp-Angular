@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -6,15 +6,13 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public selectedLanguage = 'en';
 
   constructor(private translate: TranslateService) {}
 
-  public selectLanguage(selection: string) {
+  public selectLanguage(selection: string): void {
     this.translate.use(selection);
     this.selectedLanguage = selection;
   }
-
-  ngOnInit(): void {}
 }
