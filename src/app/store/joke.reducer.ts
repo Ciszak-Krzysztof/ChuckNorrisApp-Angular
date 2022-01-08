@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { Joke } from '../models/Joke.model';
 import * as JokeActions from './joke.actions';
 
-export interface State {
+export interface JokeState {
   isLoading: boolean;
   isChuck: boolean;
   isFavourite: boolean;
@@ -15,7 +15,7 @@ export interface State {
   jokes: Joke[];
 }
 
-const initialState: State = {
+const initialState: JokeState = {
   isLoading: false,
   isChuck: true,
   isFavourite: false,
@@ -47,13 +47,23 @@ export const jokeReducer = createReducer(
     ...state,
     favouriteJokes: JSON.parse(localStorage.getItem('favouriteJokes') || '[]'),
   })),
+  on(JokeActions.getRandomJoke, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(JokeActions.getRandomJokeSuccess, (state, { joke }) => ({
     ...state,
     joke: joke,
+    isLoading: false,
+  })),
+  on(JokeActions.getJoke, (state) => ({
+    ...state,
+    isLoading: true,
   })),
   on(JokeActions.getJokeSuccess, (state, { joke }) => ({
     ...state,
     joke: joke,
+    isLoading: false,
   })),
   on(JokeActions.getManyJokesSuccess, (state, { jokes }) => ({
     ...state,

@@ -4,7 +4,7 @@ import { ActionReducerMap } from '@ngrx/store';
 export const rootReducer = {};
 
 export interface AppState {
-  joke: fromJokeReducer.State;
+  joke: fromJokeReducer.JokeState;
 }
 
 export const appReducer: ActionReducerMap<AppState, any> = {
