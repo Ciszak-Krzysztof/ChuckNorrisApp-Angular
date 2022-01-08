@@ -1,10 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+
 import { Joke } from 'src/app/models/Joke.model';
 import { JokeComponent } from '../joke.component';
-import { Store } from '@ngrx/store';
-import * as fromApp from '../../../store/app.reducer';
 import * as JokeActions from '../../../store/joke.actions';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-joke-save',
@@ -16,10 +16,7 @@ export class JokeSaveComponent implements OnDestroy {
   public jokesAmount = 0;
   public savedJokes: Joke[] = [];
 
-  constructor(
-    private store: Store<fromApp.AppState>,
-    private joke: JokeComponent
-  ) {}
+  constructor(private store$: Store, private joke: JokeComponent) {}
 
   saveJokes(): void {
     this.joke.isLoading = true;
@@ -32,7 +29,7 @@ export class JokeSaveComponent implements OnDestroy {
       this.joke.firstName = 'Chuck';
       this.joke.lastName = 'Norris';
     }
-    this.store.dispatch(
+    this.store$.dispatch(
       JokeActions.getManyJokes({
         category: this.joke.selectedCategory,
         firstName: this.joke.firstName,

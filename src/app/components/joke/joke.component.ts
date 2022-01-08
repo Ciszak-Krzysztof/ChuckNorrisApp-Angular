@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { takeUntil } from 'rxjs/operators';
 
 import { Joke } from '../../models/Joke.model';
-import * as fromApp from '../../store/app.reducer';
-import * as JokeActions from '../../store/joke.actions';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import * as JokeActions from '../../store/joke.actions';
+import { selectJokes } from 'src/app/store/joke.selectors';
 
 @Component({
   selector: 'app-joke',
@@ -27,12 +27,12 @@ export class JokeComponent implements OnInit, OnDestroy {
   public firstName = 'Chuck';
   public lastName = 'Norris';
 
-  constructor(private store$: Store<fromApp.AppState>) {}
+  constructor(private store$: Store) {}
 
   ngOnInit(): void {
     this.store$.dispatch(JokeActions.getRandomJoke());
     this.store$
-      .select('joke')
+      .select(selectJokes)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((jokeStore) => {
         (this.favouriteJokes = jokeStore.favouriteJokes),
@@ -75,7 +75,7 @@ export class JokeComponent implements OnInit, OnDestroy {
       })
     );
     this.store$
-      .select('joke')
+      .select(selectJokes)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((jokeStore) => {
         this.joke = jokeStore.joke;
@@ -85,7 +85,7 @@ export class JokeComponent implements OnInit, OnDestroy {
 
   public favouriteCheck(joke: Joke): Joke | undefined {
     this.store$
-      .select('joke')
+      .select(selectJokes)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((favJokes) => (this.favouriteJokes = favJokes.favouriteJokes));
     return this.favouriteJokes.find((newjoke) => newjoke.id === joke.id);
