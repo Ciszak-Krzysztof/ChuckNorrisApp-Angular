@@ -6,10 +6,11 @@ import {
   Output,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromApp from '../../../store/app.reducer';
-import * as JokeActions from '../../../store/joke.actions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import * as JokeActions from '../../../store/joke.actions';
+import { selectCategories } from 'src/app/store/joke.selectors';
 
 @Component({
   selector: 'app-joke-category',
@@ -22,15 +23,15 @@ export class JokeCategoryComponent implements OnInit, OnDestroy {
 
   public categories: string[] = [];
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store$: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(JokeActions.getCategories());
-    this.store
-      .select('joke')
+    this.store$.dispatch(JokeActions.getCategories());
+    this.store$
+      .select(selectCategories)
       .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((jokeStore) => {
-        this.categories = jokeStore.categories;
+      .subscribe((categories) => {
+        this.categories = categories;
       });
   }
 
