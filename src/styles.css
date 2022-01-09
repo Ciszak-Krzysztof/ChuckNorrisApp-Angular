@@ -28,3 +28,13 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.error.mat-snack-bar-container {
+  background: red;
+  color: white;
+}
+
+.success.mat-snack-bar-container {
+  background: green;
+  color: white;
+}
