@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as FileSaver from 'file-saver';
-import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 import { Joke } from '../models/Joke.model';
@@ -18,13 +17,9 @@ export class JokeEffects {
       mergeMap(() =>
         this.jokeService.getRandomJoke().pipe(
           map((joke) => JokeActions.getRandomJokeSuccess({ joke })),
-          catchError(() => {
-            this.notifications.showNotification(
-              'Something went wrong',
-              'Ok',
-              'error'
-            );
-            return EMPTY;
+          catchError((error) => {
+            this.notifications.showNotification(error.message, 'Ok', 'error');
+            throw new Error(error);
           })
         )
       )
@@ -39,13 +34,9 @@ export class JokeEffects {
           .getJoke(action.category, action.firstName, action.lastName)
           .pipe(
             map((joke) => JokeActions.getJokeSuccess({ joke })),
-            catchError(() => {
-              this.notifications.showNotification(
-                'Something went wrong',
-                'Ok',
-                'error'
-              );
-              return EMPTY;
+            catchError((error) => {
+              this.notifications.showNotification(error.message, 'Ok', 'error');
+              throw new Error(error);
             })
           )
       )
@@ -65,13 +56,9 @@ export class JokeEffects {
           )
           .pipe(
             map((jokes) => JokeActions.getManyJokesSuccess({ jokes })),
-            catchError(() => {
-              this.notifications.showNotification(
-                'Something went wrong',
-                'Ok',
-                'error'
-              );
-              return EMPTY;
+            catchError((error) => {
+              this.notifications.showNotification(error.message, 'Ok', 'error');
+              throw new Error(error);
             })
           )
       )
@@ -104,13 +91,9 @@ export class JokeEffects {
       mergeMap(() =>
         this.jokeService.getCategories().pipe(
           map((categories) => JokeActions.getCategoriesSuccess({ categories })),
-          catchError(() => {
-            this.notifications.showNotification(
-              'Something went wrong',
-              'Ok',
-              'error'
-            );
-            return EMPTY;
+          catchError((error) => {
+            this.notifications.showNotification(error.message, 'Ok', 'error');
+            throw new Error(error);
           })
         )
       )
