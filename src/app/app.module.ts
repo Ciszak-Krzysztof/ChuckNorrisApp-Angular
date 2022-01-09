@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
 import * as fromApp from './store/app.reducer';
 import { JokeComponent } from './components/joke/joke.component';
 import { JokeService } from './services/joke.service';
+import { NotificationService } from './services/notification.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FavouriteJokesComponent } from './components/favourite-jokes/favourite-jokes.component';
 import { JokeImageComponent } from './components/joke/joke-image/joke-image.component';
@@ -30,6 +32,7 @@ import { JokeSaveComponent } from './components/joke/joke-save/joke-save.compone
 import { JokeEffects } from './store/joke.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     JokeImageComponent,
     JokeCategoryComponent,
     JokeSaveComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatToolbarModule,
     MatIconModule,
     MatGridListModule,
+    MatSnackBarModule,
     HttpClientModule,
     FormsModule,
     MatProgressSpinnerModule,
@@ -75,7 +80,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       defaultLanguage: 'en',
     }),
   ],
-  providers: [JokeService],
+  providers: [JokeService, NotificationService, SnackbarComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
