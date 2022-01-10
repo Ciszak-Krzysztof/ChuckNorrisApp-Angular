@@ -13,5 +13,12 @@
     "joke": ""
   },
   "favouriteJokes": "Ulubione dowcipy",
-  "saveJokesButton": "Zapisz dowcipy"
+  "saveJokesButton": "Zapisz dowcipy",
+  "settings": {
+    "rateApp": "Oceń apkę",
+    "cancel": "Anuluj",
+    "currentRating": "Obecna ocena:",
+    "rate": "Oceń aplikację",
+    "selectedRating": "Obecna ocena aplikacji: "
+  }
 }

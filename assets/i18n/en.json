@@ -13,5 +13,12 @@
     "joke": "Joke"
   },
   "favouriteJokes": "Favourite Jokes",
-  "saveJokesButton": "Save Jokes"
+  "saveJokesButton": "Save Jokes",
+  "settings": {
+    "rateApp": "Rate app",
+    "cancel": "Cancel",
+    "currentRating": "Current rating:",
+    "rate": "Rate the application",
+    "selectedRating": "Your selected rating is: "
+  }
 }
