@@ -16,6 +16,11 @@
       "header.favJokesNav" | translate
     }}</a></span
   >
+  <span
+    ><a routerLinkActive="active" routerLink="/settings">
+      {{ "header.settingsNav" | translate }}</a
+    ></span
+  >
   <mat-select
     [ngModel]="selectedLanguage"
     [ngModelOptions]="{ standalone: true }"
