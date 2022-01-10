@@ -54,3 +54,8 @@ export const getManyJokesSuccess = createAction(
   '[Jokes] Get Many Jokes Success',
   props<{ jokes: Joke[] }>()
 );
+
+export const setRating = createAction(
+  '[Settings] Set rating',
+  props<{ rating: number }>()
+);

@@ -18,6 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import * as fromApp from './store/app.reducer';
@@ -33,6 +35,9 @@ import { JokeEffects } from './store/joke.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -48,6 +53,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     JokeCategoryComponent,
     JokeSaveComponent,
     SnackbarComponent,
+    DialogComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,9 +75,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatIconModule,
     MatGridListModule,
     MatSnackBarModule,
+    MatRadioModule,
     HttpClientModule,
     FormsModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -80,7 +89,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       defaultLanguage: 'en',
     }),
   ],
-  providers: [JokeService, NotificationService, SnackbarComponent],
+  providers: [JokeService, NotificationService, SnackbarComponent, MatDialog],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

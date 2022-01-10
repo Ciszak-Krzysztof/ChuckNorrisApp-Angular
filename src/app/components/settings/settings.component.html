@@ -1,0 +1,11 @@
+<div>
+  <p>{{ "settings.currentRating" | translate }} {{ rating }}</p>
+  <button
+    type="button"
+    class="full-width rateButton"
+    (click)="openRatingDialog()"
+    mat-flat-button
+  >
+    {{ "settings.rateApp" | translate }}
+  </button>
+</div>
