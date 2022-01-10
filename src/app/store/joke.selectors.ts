@@ -13,3 +13,8 @@ export const selectCategories = createSelector(
   selectJokes,
   (state: JokeState) => state.categories
 );
+
+export const selectRating = createSelector(
+  selectJokes,
+  (state: JokeState) => state.rating
+);

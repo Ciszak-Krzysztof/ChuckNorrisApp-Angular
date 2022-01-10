@@ -1,0 +1,33 @@
+<label id="radio-group-label">{{ "settings.rate" | translate }}</label>
+<mat-radio-group
+  aria-labelledby="radio-group-label"
+  class="radio-group"
+  [(ngModel)]="rating"
+>
+  <mat-radio-button
+    class="radio-button"
+    *ngFor="let rating of ratings"
+    [value]="rating"
+  >
+    {{ rating }}
+  </mat-radio-button>
+</mat-radio-group>
+<div>{{ "settings.selectedRating" | translate }}{{ rating }}</div>
+<div>
+  <button
+    type="button"
+    class="rateButton"
+    (click)="closeDialog()"
+    mat-flat-button
+  >
+    {{ "settings.cancel" | translate }}
+  </button>
+  <button
+    type="button"
+    class="rateButton"
+    (click)="setRating()"
+    mat-flat-button
+  >
+    {{ "settings.rateApp" | translate }}
+  </button>
+</div>

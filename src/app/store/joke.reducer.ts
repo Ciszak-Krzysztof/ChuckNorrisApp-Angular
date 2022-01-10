@@ -13,6 +13,7 @@ export interface JokeState {
   firstName: string;
   lastName: string;
   jokes: Joke[];
+  rating: number;
 }
 
 const initialState: JokeState = {
@@ -29,6 +30,7 @@ const initialState: JokeState = {
   firstName: 'Chuck',
   lastName: 'Norris',
   jokes: [],
+  rating: 0,
 };
 
 export const jokeReducer = createReducer(
@@ -72,5 +74,9 @@ export const jokeReducer = createReducer(
   on(JokeActions.getCategoriesSuccess, (state, { categories }) => ({
     ...state,
     categories: categories,
+  })),
+  on(JokeActions.setRating, (state, { rating }) => ({
+    ...state,
+    rating: rating,
   }))
 );
