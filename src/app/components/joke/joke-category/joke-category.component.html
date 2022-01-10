@@ -6,8 +6,10 @@
     (ngModelChange)="onValueChanged($event)"
   >
     <mat-option value="">{{ "jokeCategory" | translate }}</mat-option>
-    <mat-option *ngFor="let category of categories" [value]="category">{{
-      category
-    }}</mat-option>
+    <mat-option
+      *ngFor="let category of categories$ | async"
+      [value]="category"
+      >{{ category }}</mat-option
+    >
   </mat-select>
 </mat-form-field>

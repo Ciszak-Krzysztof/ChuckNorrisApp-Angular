@@ -35,7 +35,7 @@ import { JokeEffects } from './store/joke.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { RatingModalComponent } from './components/ratingModal/ratingModal.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -53,7 +53,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     JokeCategoryComponent,
     JokeSaveComponent,
     SnackbarComponent,
-    DialogComponent,
+    RatingModalComponent,
     SettingsComponent,
   ],
   imports: [

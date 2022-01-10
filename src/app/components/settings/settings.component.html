@@ -1,5 +1,5 @@
 <div>
-  <p>{{ "settings.currentRating" | translate }} {{ rating }}</p>
+  <p>{{ "settings.currentRating" | translate }} {{ rating$ | async }}</p>
   <button
     type="button"
     class="full-width rateButton"

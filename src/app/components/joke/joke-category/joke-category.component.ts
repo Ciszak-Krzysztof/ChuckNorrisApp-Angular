@@ -1,13 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import * as JokeActions from '../../../store/joke.actions';
 import { selectCategories } from 'src/app/store/joke.selectors';
@@ -17,30 +10,19 @@ import { selectCategories } from 'src/app/store/joke.selectors';
   templateUrl: './joke-category.component.html',
   styleUrls: ['./joke-category.component.css'],
 })
-export class JokeCategoryComponent implements OnInit, OnDestroy {
-  private ngDestroyed$ = new Subject();
+export class JokeCategoryComponent implements OnInit {
   @Output() selectedCategory = new EventEmitter<string>();
 
-  public categories: string[] = [];
+  public categories$: Observable<string[]> | undefined;
 
   constructor(private store$: Store) {}
 
   ngOnInit(): void {
     this.store$.dispatch(JokeActions.getCategories());
-    this.store$
-      .select(selectCategories)
-      .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((categories) => {
-        this.categories = categories;
-      });
+    this.categories$ = this.store$.select(selectCategories);
   }
 
-  public onValueChanged(selected: string): void {
+  onValueChanged(selected: string): void {
     this.selectedCategory.emit(selected);
-  }
-
-  ngOnDestroy(): void {
-    this.ngDestroyed$.next();
-    this.ngDestroyed$.complete();
   }
 }

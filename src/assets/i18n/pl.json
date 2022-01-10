@@ -20,5 +20,8 @@
     "currentRating": "Obecna ocena:",
     "rate": "Oceń aplikację",
     "selectedRating": "Obecna ocena aplikacji: "
+  },
+  "snackbars": {
+    "addedFavJoke": "Dodano ulubiony żart"
   }
 }
