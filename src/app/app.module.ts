@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import * as fromApp from './store/app.reducer';
@@ -33,11 +35,9 @@ import { JokeCategoryComponent } from './components/joke/joke-category/joke-cate
 import { JokeSaveComponent } from './components/joke/joke-save/joke-save.component';
 import { JokeEffects } from './store/joke.effects';
 import { environment } from 'src/environments/environment';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { RatingModalComponent } from './components/ratingModal/ratingModal.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { MatDialog } from '@angular/material/dialog';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

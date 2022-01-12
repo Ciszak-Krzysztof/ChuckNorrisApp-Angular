@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FavouriteJokesComponent } from './favourite-jokes.component';
+import * as fromApp from '../../store/app.reducer';
+import { StoreModule } from '@ngrx/store';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 describe('FavouriteJokesComponent', () => {
   let component: FavouriteJokesComponent;
@@ -8,9 +13,20 @@ describe('FavouriteJokesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavouriteJokesComponent ]
-    })
-    .compileComponents();
+      declarations: [FavouriteJokesComponent],
+      imports: [
+        StoreModule.forRoot(fromApp.appReducer),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+          },
+          defaultLanguage: 'en',
+        }),
+        HttpClientModule,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
