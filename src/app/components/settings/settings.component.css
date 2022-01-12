@@ -1,11 +1,17 @@
 .full-width {
   width: 30%;
 }
+p {
+  font-size: 1.75vmin;
+}
 
 .rateButton {
-  height: 5vh;
-  margin-top: 1vh;
+  height: 5vmin;
+  margin-top: 1vmin;
   background-color: #34394f;
   color: white;
-  font-size: 1.5vh;
+  font-size: 1.75vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

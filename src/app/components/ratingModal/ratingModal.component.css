@@ -1,17 +1,24 @@
+* {
+  font-size: 1.75vmin;
+}
+
 .radio-group {
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
+  margin: 1vmin 0;
 }
 
 .radio-button {
-  margin: 5px;
+  margin: 0.3vmin;
 }
 
 .rateButton {
-  height: 5vh;
-  margin: 1vh;
+  height: 5vmin;
+  margin: 1vmin;
   background-color: #34394f;
   color: white;
-  font-size: 1.5vh;
+  font-size: 1.75vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
