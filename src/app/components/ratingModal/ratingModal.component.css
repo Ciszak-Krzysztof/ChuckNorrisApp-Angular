@@ -1,13 +1,20 @@
-.full-width {
-  width: 30%;
-}
-p {
+* {
   font-size: 1.75vmin;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1vmin 0;
+}
+
+.radio-button {
+  margin: 0.3vmin;
 }
 
 .rateButton {
   height: 5vmin;
-  margin-top: 1vmin;
+  margin: 1vmin;
   background-color: #34394f;
   color: white;
   font-size: 1.75vmin;

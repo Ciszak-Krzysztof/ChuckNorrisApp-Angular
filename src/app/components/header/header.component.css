@@ -4,7 +4,7 @@ span {
 
 a {
   color: white;
-  font-size: 2vh;
+  font-size: 2vmin;
   text-decoration: none;
 }
 
@@ -18,6 +18,6 @@ a {
 
 .languagePicker {
   margin-left: 6%;
-  max-width: 4%;
-  font-size: 1.7vh;
+  max-width: 6%;
+  font-size: 1.7vmin;
 }

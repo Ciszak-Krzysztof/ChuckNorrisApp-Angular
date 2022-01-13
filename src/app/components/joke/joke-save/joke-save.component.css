@@ -7,18 +7,18 @@
 }
 
 .saveButton {
-  height: 5vh;
+  height: 5vmin;
   background-color: #34394f;
   color: white;
-  font-size: 1.5vh;
+  font-size: 1.5vmin;
 }
 
 .amountButton {
   background-color: #34394f;
   display: flex;
   justify-content: center;
-  height: 3vh;
-  width: 3vh;
+  height: 3vmin;
+  width: 3vmin;
 }
 
 .amountInput {
@@ -26,5 +26,12 @@
 }
 
 .amountIcon {
-  font-size: 1.8vh;
+  font-size: 1.8vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-mini-fab .mat-button-wrapper {
+  padding: 0;
 }

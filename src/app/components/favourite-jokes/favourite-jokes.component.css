@@ -1,3 +1,7 @@
+* {
+  font-size: 1.75vmin;
+}
+
 .joke-container {
   margin-bottom: 5px;
   display: flex;
@@ -6,4 +10,7 @@
 .button {
   margin-left: auto;
   margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
