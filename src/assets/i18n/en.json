@@ -20,5 +20,8 @@
     "currentRating": "Current rating:",
     "rate": "Rate the application",
     "selectedRating": "Your selected rating is: "
+  },
+  "snackbars": {
+    "addedFavJoke": "Added Favourite Joke"
   }
 }

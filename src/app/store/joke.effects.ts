@@ -8,6 +8,7 @@ import { Joke } from '../models/Joke.model';
 import { JokeService } from '../services/joke.service';
 import * as JokeActions from '../store/joke.actions';
 import { NotificationService } from '../services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class JokeEffects {
@@ -111,7 +112,7 @@ export class JokeEffects {
           const data = [...favJokes, action.joke];
           localStorage.setItem('favouriteJokes', JSON.stringify(data));
           this.notifications.showNotification(
-            'Added Favourite Joke',
+            this.translate.instant('snackbars.addedFavJoke'),
             'Ok',
             'success'
           );
@@ -138,6 +139,7 @@ export class JokeEffects {
   constructor(
     private actions$: Actions,
     private jokeService: JokeService,
-    private notifications: NotificationService
+    private notifications: NotificationService,
+    private translate: TranslateService
   ) {}
 }
