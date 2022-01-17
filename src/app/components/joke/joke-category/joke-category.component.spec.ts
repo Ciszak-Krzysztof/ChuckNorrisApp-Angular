@@ -38,4 +38,11 @@ describe('JokeCategoryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit selected value', () => {
+    spyOn(component.selectedCategory, 'emit');
+
+    component.onValueChanged('nerdy');
+    expect(component.selectedCategory.emit).toHaveBeenCalledWith('nerdy');
+  });
 });

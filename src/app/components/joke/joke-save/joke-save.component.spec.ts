@@ -40,4 +40,18 @@ describe('JokeSaveComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should increase joke amount', () => {
+    component.jokesAmount = 1;
+    expect(component.jokesAmount).toBe(1);
+    component.onAddJokesAmount();
+    expect(component.jokesAmount).toBe(2);
+  });
+
+  it('should decrease joke amount', () => {
+    component.jokesAmount = 1;
+    expect(component.jokesAmount).toBe(1);
+    component.onReduceJokesAmount();
+    expect(component.jokesAmount).toBe(0);
+  });
 });

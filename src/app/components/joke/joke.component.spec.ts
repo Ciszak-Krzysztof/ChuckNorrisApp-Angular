@@ -38,4 +38,19 @@ describe('JokeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle isFavouriteJoke', () => {
+    component.isFavourite = false;
+    expect(component.isFavourite).toBe(false);
+    component.onToggleFavourite();
+    expect(component.isFavourite).toBe(true);
+    component.onToggleFavourite();
+    expect(component.isFavourite).toBe(false);
+  });
+
+  it('should select category', () => {
+    component.selectedCategory = 'category';
+    component.selectCategory('nerdy');
+    expect(component.selectedCategory).toBe('nerdy');
+  });
 });
