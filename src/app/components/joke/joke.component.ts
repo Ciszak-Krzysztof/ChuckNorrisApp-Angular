@@ -27,7 +27,7 @@ export class JokeComponent implements OnInit, OnDestroy {
   public firstName = 'Chuck';
   public lastName = 'Norris';
 
-  constructor(private store$: Store) {}
+  constructor(public store$: Store) {}
 
   ngOnInit(): void {
     this.store$.dispatch(JokeActions.getRandomJoke());

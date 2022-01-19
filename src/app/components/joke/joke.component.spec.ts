@@ -53,4 +53,11 @@ describe('JokeComponent', () => {
     component.selectCategory('nerdy');
     expect(component.selectedCategory).toBe('nerdy');
   });
+
+  it('should dispatch getJoke action', () => {
+    const storeSpy = spyOn(component.store$, 'dispatch').and.callThrough();
+    component.fetchJoke();
+    fixture.detectChanges();
+    expect(storeSpy).toHaveBeenCalled();
+  });
 });
